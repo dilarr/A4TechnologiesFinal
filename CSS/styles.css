@@ -2322,12 +2322,12 @@
         
         /* Mobile responsive card sizing */
         @media (max-width: 768px) {
-<<<<<<< HEAD
+
           .projects-grid.mobile-carousel .project-card {
             flex: 0 0 calc(100% - 50px); /* Show one card with side padding */
             margin: 0 20px; /* Adjust margin for spacing */
           }
-=======
+
             .projects-grid.mobile-carousel .project-card {
                 flex: 0 0 calc(100% - 40px); /* Show one card with side padding */
                 margin: 0 20px; /* Adjust margin for spacing */
@@ -2341,7 +2341,7 @@
                 margin: 0 10px;
                 min-height: 380px;
             }
->>>>>>> 8e8837c781fcc434cc0ad4781abb96c641a70832
+
         }
 
         .project-card:hover {
