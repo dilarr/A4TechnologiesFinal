@@ -1,6 +1,7 @@
  const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
+        const submitBtnLoading = document.getElementById('submitBtnLoading'); // Get reference to the loading spinner
         const messageDiv = document.getElementById('messageDiv');
 
         form.addEventListener('submit', async (e) => {
@@ -44,12 +45,18 @@
 
         function setLoadingState(isLoading) {
             submitBtn.disabled = isLoading;
-            btnText.style.opacity = isLoading ? '0' : '1';
-            // Use a different loading indicator for form submission
             if (isLoading) {
-                btnText.textContent = 'Sending...';
+                if (btnText) btnText.style.display = 'none'; // Hide original text
+                if (submitBtnLoading) {
+                    submitBtnLoading.style.display = 'flex'; // Show loading spinner
+                    submitBtnLoading.setAttribute('aria-hidden', 'false');
+                }
             } else {
-                btnText.textContent = 'Send Message';
+                if (btnText) btnText.style.display = 'inline'; // Show original text
+                if (submitBtnLoading) {
+                    submitBtnLoading.style.display = 'none'; // Hide loading spinner
+                    submitBtnLoading.setAttribute('aria-hidden', 'true');
+                }
             }
         }
 

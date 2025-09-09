@@ -244,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ===== FORM HANDLING =====
     
-    // Contact form submission
     const contactForm = document.querySelector('.contact-form form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -277,39 +276,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 2000);
         });
     }
-    
-    // Newsletter form submission
-    const newsletterForm = document.querySelector('.newsletter-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const input = this.querySelector('input');
-            const button = this.querySelector('button');
-            const originalIcon = button.innerHTML;
-            
-            // Show loading state
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            button.disabled = true;
-            
-            // Simulate subscription
-            setTimeout(() => {
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                button.style.background = 'var(--success-color)';
-                
-                // Reset
-                input.value = '';
-                
-                setTimeout(() => {
-                    button.innerHTML = originalIcon;
-                    button.disabled = false;
-                    button.style.background = '';
-                }, 2000);
-                
-                showNotification('Successfully subscribed to newsletter!', 'success');
-            }, 1500);
-        });
+
+    // Handle general site loader (if any - ensure it doesn't conflict with form loader)
+    const siteLoader = document.getElementById('loading'); // This is for the *site* loader
+    if (siteLoader) {
+        if (document.readyState === 'loading') {
+            siteLoader.classList.add('show');
+        } else {
+            siteLoader.classList.remove('show');
+            siteLoader.style.display = 'none';
+        }
     }
+
+    // This part should handle the visibility of the general site loader
+    window.addEventListener('load', () => {
+        if (siteLoader) {
+            siteLoader.classList.remove('show');
+            // Use a timeout to ensure the fade-out transition completes
+            setTimeout(() => {
+                siteLoader.style.display = 'none';
+            }, 500); // Match this duration with your CSS transition duration
+        }
+    });
     
     // ===== NOTIFICATION SYSTEM =====
     
@@ -471,36 +459,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== LOADING SCREEN =====
     
-    const loading = document.getElementById('loading');
-    if (loading) {
-        // Show loader only during initial page load
-        if (document.readyState === 'loading') {
-            loading.classList.add('show');
-            
-            // Hide loader when page is fully loaded
-            window.addEventListener('load', function() {
-                setTimeout(() => {
-                    loading.classList.remove('show');
-                    setTimeout(() => {
-                        loading.style.display = 'none';
-                    }, 500);
-                }, 1000);
-            });
-        } else {
-            // Page already loaded, keep loader hidden
-            loading.style.display = 'none';
-        }
-        
-        // Fallback: ensure loader is hidden after maximum time
-        setTimeout(() => {
-            if (loading.classList.contains('show')) {
-                loading.classList.remove('show');
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 500);
-            }
-        }, 5000);
-    }
+    // The general site loader is now handled by the contact form's submit handler.
+    // This block is no longer needed for the site-wide loader.
 
     // ===== PROJECT CAROUSEL FUNCTIONALITY =====
     const projectsCarouselTrack = document.getElementById('projectsCarouselTrack');

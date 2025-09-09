@@ -204,7 +204,8 @@
         }
         .contact-cta-desktop {
           margin-left: 16px;
-          display: flex; /* Display desktop CTA by default */
+          margin-right: var(--spacing-sm); /* Add space on the right for desktop */
+          display: flex;
         }
 
         /* Background Elements - Updated with IT company images and darker overlay */
@@ -690,7 +691,7 @@
           align-items: center;
           justify-content: center;
           gap: var(--spacing-xs);
-          padding: 12px 24px;
+          padding: var(--spacing-sm) var(--spacing-lg); /* Adjusted padding for more balanced look */
           border-radius: var(--radius-lg);
           text-decoration: none;
           font-weight: 600;
@@ -700,7 +701,8 @@
           border: 2px solid transparent;
           position: relative;
           overflow: hidden;
-          min-width: 140px;
+          min-width: unset; /* Remove fixed min-width to allow natural sizing */
+          width: fit-content; /* Allow button to fit its content */
           text-transform: uppercase;
           cursor: pointer;
         }
@@ -871,40 +873,66 @@
   flex: 0 0 auto;
   opacity: 0.9;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 180px;
+  width: 150px; /* Make it square */
+  height: 150px; /* Make it square */
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 50%; /* Make it circular */
   padding: 10px;
+  overflow: hidden; /* Hide overflow outside the circle */
+  box-shadow: var(--shadow-md);
+  background-color: white; /* Default white background for all client items */
+}
+
+.client-item:first-child {
+    background-color: white; /* Default white background for all client items */
+}
+
+.client-item:first-child:hover {
+    background-color: black; /* Keep first item black on hover */
+    background: black; /* Ensure no gradient is applied */
+    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+}
+.client-item:nth-child(1) {
+    background-color: black; /* Black background for the first duplicated client item */
+}
+.client-item:nth-child(9) {
+    background-color: black; /* Black background for the first duplicated client item */
+}
+
+.client-item:nth-child(9):hover {
+    background-color: black; /* Keep ninth item black on hover */
+    background: black; /* Ensure no gradient is applied */
+    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+}
+.client-item:nth-child(1):hover {
+    background-color: black; /* Keep ninth item black on hover */
+    background: black; /* Ensure no gradient is applied */
+    box-shadow: none; /* Remove box-shadow on hover for this specific item */
 }
 
 .client-item:hover {
   opacity: 1;
   transform: scale(1.05) translateY(-5px);
   box-shadow: 0 12px 35px rgba(102, 126, 234, 0.25);
-  background: rgba(102, 126, 234, 0.05);
+  background: white;
   animation: clientHover 2s ease-in-out infinite;
 }
 
 .client-item img {
-            height: 150px; /* Increased logo height */
-            width: auto;
-            max-width: 200px; /* Increased max width */
-            object-fit: contain;
-            transition: all 0.3s ease;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: optimizeQuality;
-        }
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the circular area */
+  transition: transform var(--transition-normal);
+}
 
-        .client-item:hover img {
-            transform: scale(1.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: brightness(1.1) contrast(1.1);
-        }
-
+.client-item:hover img {
+  transform: scale(1.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(1.1) contrast(1.1);
+}
 
 /* Continuous scrolling animation */
 @keyframes scrollClients {
@@ -936,7 +964,6 @@
 
 @media (max-width: 768px) {
   .clients-container {
-    max-width: 100%;
     padding: 0 20px;
   }
 
@@ -947,11 +974,11 @@
 
   .client-item {
     width: 140px;
+    height: 140px; /* Make it square */
   }
 
   .client-item img {
-    height: 120px;
-    max-width: 160px;
+    /* Removed height and max-width as it should fill the parent with object-fit: cover */
   }
 }
 
@@ -967,11 +994,11 @@
 
   .client-item {
     width: 120px;
+    height: 120px; /* Make it square */
   }
 
   .client-item img {
-    height: 100px;
-    max-width: 140px;
+    /* Removed height and max-width */
   }
 }
 
@@ -1150,11 +1177,15 @@
   }
 
   .btn {
-    padding: 12px 20px;
+    padding: var(--spacing-sm) var(--spacing-md); /* Adjusted padding for consistency */
     font-size: 0.9rem;
-    min-width: 160px;
-    width: auto;
+    min-width: unset;
+    width: fit-content; /* Allow button to fit its content */
     max-width: 200px;
+  }
+
+  .btn i {
+    font-size: 0.9rem;
   }
 
   /* Hide some floating shapes on mobile */
@@ -1295,9 +1326,11 @@
   }
 
   .btn {
-    padding: 10px 18px;
-    font-size: 0.85rem;
-    min-width: 150px;
+    padding: var(--spacing-sm) var(--spacing-md); /* Adjusted padding for consistency */
+    font-size: 0.9rem;
+    min-width: unset;
+    width: fit-content; /* Allow button to fit its content */
+    max-width: 200px;
   }
 
   .btn i {
@@ -1846,10 +1879,12 @@
 .overview-text p {
   color: var(--text-secondary);
   font-size: 1.1rem;
-  line-height: 1.8;
+  /* line-height: 1.8; */
   margin-bottom: var(--spacing-md);
   text-align: justify;
   text-justify: inter-word;
+  word-spacing: -0.25em;
+  /* word-spacing: normal; */
 }
 
 .overview-image {
@@ -4534,6 +4569,7 @@
 
   .overview-text p {
     font-size: 1rem;
+    word-spacing: -0.05em; /* Reduce space between words for medium screens */
   }
 
   /* Problems Solutions */
@@ -4850,3 +4886,14 @@
     display: none;
   }
 }
+
+        .btn .loading {
+            display: none; /* Hide loading spinner by default */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #btnText {
+            text-align: center; /* Ensure text is perfectly centered */
+            width: 100%; /* Make sure it takes full width to center */
+        }
