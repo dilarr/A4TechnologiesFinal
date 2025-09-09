@@ -355,15 +355,15 @@
 }
 
 .nav-container {
-  width: 100%; /* Set width to 100% to fill available space */
+  width: 100%; 
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 50px; /* Increased space between logo and nav items */
-  padding-left: var(--spacing-lg); /* Retain left padding */
-  padding-right: 0; /* Push right elements to the edge */
-  height: 50px; /* Reduced height for the navbar */
+  gap: 50px; 
+  padding-left: var(--spacing-lg); 
+  padding-right: 0; 
+  height: 50px; 
 }
 
 @media (max-width: 768px) {
@@ -375,7 +375,7 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 5px; /* Reduce space between logo and company name */
+  gap: 5px; 
 }
 
 .navbar-right-items {
@@ -386,7 +386,7 @@
 }
 
        .nav-logo {
-  height: 70px; /* Further increased logo height */
+  height: 70px; 
   width: auto;
   object-fit: contain;
   transition: all var(--transition-fast);
@@ -445,7 +445,7 @@
 
         /* Mobile Menu */
         .mobile-menu {
-          display: none; /* Hide mobile menu by default on desktop */
+          display: none; 
           flex-direction: column;
           cursor: pointer;
           z-index: 1001;
@@ -453,11 +453,11 @@
           padding: var(--spacing-xs);
           min-width: 30px;
           min-height: 30px;
-          margin-left: auto; /* Push mobile menu to the right when visible */
+          margin-left: auto; 
         }
         @media (max-width: 768px) {
           .mobile-menu {
-            display: flex !important; /* Show mobile menu on mobile, force with !important */
+            display: flex !important; 
           }
         }
 
@@ -486,10 +486,10 @@
         /* Enhanced Mobile Navigation Overlay */
         .mobile-nav-overlay {
           position: fixed;
-  top: 85px; /* Adjusted to match new navbar height */
+  top: 85px; 
           right: -100%;
           width: 100%;
-  height: calc(100vh - 85px); /* Adjusted to match new navbar height */
+  height: calc(100vh - 85px);
           background: rgba(3, 24, 46, 0.98);
           backdrop-filter: blur(20px);
           z-index: 999;
@@ -691,7 +691,7 @@
           align-items: center;
           justify-content: center;
           gap: var(--spacing-xs);
-          padding: var(--spacing-sm) var(--spacing-lg); /* Adjusted padding for more balanced look */
+          padding: var(--spacing-sm) var(--spacing-lg);
           border-radius: var(--radius-lg);
           text-decoration: none;
           font-weight: 600;
@@ -701,8 +701,8 @@
           border: 2px solid transparent;
           position: relative;
           overflow: hidden;
-          min-width: unset; /* Remove fixed min-width to allow natural sizing */
-          width: fit-content; /* Allow button to fit its content */
+          min-width: unset; 
+          width: fit-content; 
           text-transform: uppercase;
           cursor: pointer;
         }
@@ -873,44 +873,44 @@
   flex: 0 0 auto;
   opacity: 0.9;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 150px; /* Make it square */
-  height: 150px; /* Make it square */
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 50%; /* Make it circular */
+  border-radius: 50%;
   padding: 10px;
-  overflow: hidden; /* Hide overflow outside the circle */
+  overflow: hidden;
   box-shadow: var(--shadow-md);
-  background-color: white; /* Default white background for all client items */
+  background-color: white; 
 }
 
 .client-item:first-child {
-    background-color: white; /* Default white background for all client items */
+    background-color: white;
 }
 
 .client-item:first-child:hover {
-    background-color: black; /* Keep first item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black; 
+    box-shadow: none; /
 }
 .client-item:nth-child(1) {
-    background-color: black; /* Black background for the first duplicated client item */
+    background-color: black; 
 }
 .client-item:nth-child(9) {
-    background-color: black; /* Black background for the first duplicated client item */
+    background-color: black; 
 }
 
 .client-item:nth-child(9):hover {
-    background-color: black; /* Keep ninth item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black; 
+    box-shadow: none; 
 }
 .client-item:nth-child(1):hover {
-    background-color: black; /* Keep ninth item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black;
+    box-shadow: none; 
 }
 
 .client-item:hover {
@@ -977,9 +977,6 @@
     height: 140px; /* Make it square */
   }
 
-  .client-item img {
-    /* Removed height and max-width as it should fill the parent with object-fit: cover */
-  }
 }
 
 @media (max-width: 480px) {
@@ -997,9 +994,7 @@
     height: 120px; /* Make it square */
   }
 
-  .client-item img {
-    /* Removed height and max-width */
-  }
+  
 }
 
 /* Mobile Responsiveness */
@@ -2323,7 +2318,7 @@
         }
         @media (max-width: 768px) {
           .projects-grid.mobile-carousel .project-card {
-            flex: 0 0 calc(100% - 40px); /* Show one card with side padding */
+            flex: 0 0 calc(100% - 50px); /* Show one card with side padding */
             margin: 0 20px; /* Adjust margin for spacing */
           }
         }
@@ -3057,7 +3052,7 @@
             position: relative;
             padding-left: var(--spacing-md);
             border-left: 4px solid var(--primary-color);
-            text-align: justify;
+            text-align: initial ;
             text-justify: inter-word;
             flex-grow: 1;
         }
@@ -3136,13 +3131,14 @@
             box-shadow: var(--shadow-lg);
             transition: all var(--transition-normal);
             border: 1px solid var(--border-color);
-            text-align: center;
+            text-align: inherit;
             position: relative;
             overflow: hidden;
             margin: 0 var(--spacing-xs);
             display: flex;
             flex-direction: column;
             align-items: center;
+            word-spacing: -0.25em;
         }
 
         .testimonial-card-small::before {
