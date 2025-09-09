@@ -23,19 +23,65 @@ class ServicesCarousel {
     
     getTotalSlides() {
         if (this.isMobile) {
-            return 9; // 1 card per slide
+            return 9; // 1 card per slide - each individual card is a slide
         } else if (this.isTablet) {
             return Math.ceil(9 / 2); // 2 cards per slide = 5 slides
         } else {
-            return 3; // 3 cards per slide
+            return 3; // 3 cards per slide - each slide group is a slide
         }
     }
     
     init() {
+        this.restructureForMobile();
         this.createDots();
         this.bindEvents();
         this.updateCarousel();
         this.updateButtonStates();
+    }
+
+    restructureForMobile() {
+        if (this.isMobile) {
+            // On mobile, restructure HTML so each card is its own slide
+            const allCards = Array.from(this.serviceCards);
+            this.grid.innerHTML = '';
+            
+            allCards.forEach(card => {
+                const slideGroup = document.createElement('div');
+                slideGroup.className = 'slide-group';
+                slideGroup.appendChild(card);
+                this.grid.appendChild(slideGroup);
+            });
+            
+            // Update references
+            this.slideGroups = this.grid.querySelectorAll('.slide-group');
+            this.serviceCards = this.grid.querySelectorAll('.service-card');
+        } else {
+            // On desktop/tablet, restore original structure with 3 cards per slide group
+            const allCards = Array.from(this.serviceCards);
+            this.grid.innerHTML = '';
+            
+            // Create 3 slide groups with 3 cards each
+            for (let i = 0; i < 3; i++) {
+                const slideGroup = document.createElement('div');
+                slideGroup.className = 'slide-group';
+                
+                for (let j = 0; j < 3; j++) {
+                    const cardIndex = i * 3 + j;
+                    if (cardIndex < allCards.length) {
+                        slideGroup.appendChild(allCards[cardIndex]);
+                    }
+                }
+                
+                this.grid.appendChild(slideGroup);
+            }
+            
+            // Update references
+            this.slideGroups = this.grid.querySelectorAll('.slide-group');
+            this.serviceCards = this.grid.querySelectorAll('.service-card');
+        }
+        
+        // Re-bind read more buttons after restructuring
+        this.bindReadMoreButtons();
     }
 
     createDots() {
@@ -82,6 +128,9 @@ class ServicesCarousel {
 
             // Only recreate if mode changed
             if (wasMobile !== this.isMobile || wasTablet !== this.isTablet) {
+                // Restructure HTML for new mode
+                this.restructureForMobile();
+                
                 // Recompute total slides based on new mode
                 this.totalSlides = this.getTotalSlides();
 
@@ -138,6 +187,7 @@ class ServicesCarousel {
     }
 
     bindReadMoreButtons() {
+        // Re-bind read more buttons after restructuring
         const readMoreBtns = document.querySelectorAll('#services .read-more-btn');
         const serviceDetails = [
             {
