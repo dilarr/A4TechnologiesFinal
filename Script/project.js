@@ -1,81 +1,202 @@
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Mobile Carousel Functionality
+        // Enhanced Mobile Carousel Functionality
         const track = document.getElementById('projectsCarouselTrack');
         const prevBtn = document.getElementById('projectsPrevBtn');
         const nextBtn = document.getElementById('projectsNextBtn');
-        const cards = document.querySelectorAll('.mobile-carousel .project-card');
+        
+        if (!track || !prevBtn || !nextBtn) return;
 
         let currentIndex = 0;
+        let isAnimating = false;
+        let autoPlayInterval;
 
-        // Function to get currently visible project cards
+        // Function to get currently visible project cards in mobile carousel
         function getVisibleCards() {
-            return document.querySelectorAll('.project-card[style="display: flex;"]');
+            return track.querySelectorAll('.project-card[style*="display: flex"], .project-card:not([style*="display: none"])');
         }
 
-        // Function to update carousel position
-        function updateCarousel() {
+        // Function to get cards per view based on screen size
+        function getCardsPerView() {
+            if (window.innerWidth <= 480) return 1;
+            if (window.innerWidth <= 768) return 1;
+            return 1; // Always show 1 card at a time for better mobile experience
+        }
+
+        // Function to update carousel position with smooth animation
+        function updateCarousel(smooth = true) {
             const visibleCards = getVisibleCards();
-            if (visibleCards.length === 0) return; // No cards to display
+            if (visibleCards.length === 0) return;
 
-            const track = document.getElementById('projectsCarouselTrack');
-            if (!track) return; // Ensure track exists
+            const cardsPerView = getCardsPerView();
+            const maxIndex = Math.max(0, visibleCards.length - cardsPerView);
+            currentIndex = Math.min(currentIndex, maxIndex);
 
-            const cardWidth = visibleCards[0].offsetWidth +
-                             parseInt(getComputedStyle(visibleCards[0]).marginLeft) +
+            const cardWidth = visibleCards[0].offsetWidth + 
+                             parseInt(getComputedStyle(visibleCards[0]).marginLeft) + 
                              parseInt(getComputedStyle(visibleCards[0]).marginRight);
-            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            
+            const translateX = -(currentIndex * cardWidth);
+            
+            if (smooth) {
+                track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            } else {
+                track.style.transition = 'none';
+            }
+            
+            track.style.transform = `translateX(${translateX}px)`;
 
             // Update button states
-            if (prevBtn) prevBtn.disabled = currentIndex === 0;
-            if (nextBtn) nextBtn.disabled = currentIndex === visibleCards.length - 1;
-
-            // Show/hide carousel buttons based on visible cards count
-            if (prevBtn) prevBtn.style.display = visibleCards.length > 1 ? 'block' : 'none';
-            if (nextBtn) nextBtn.style.display = visibleCards.length > 1 ? 'block' : 'none';
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
+            
+            // Add visual feedback for disabled buttons
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
         }
 
-        if (track && prevBtn && nextBtn) {
-            // Next button click handler
-            nextBtn.addEventListener('click', function() {
-                if (currentIndex < getVisibleCards().length - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
-
-            // Previous button click handler
-            prevBtn.addEventListener('click', function() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            });
-
-            // Initialize carousel
-            updateCarousel();
-
-            // Update on window resize
-            window.addEventListener('resize', () => {
-                // Re-filter to get correct visible cards on resize if needed (though filter already handles this)
-                const activeFilterButton = document.querySelector('.filter-btn.active');
-                if (activeFilterButton) {
-                    const filterValue = activeFilterButton.getAttribute('data-filter');
-                    document.querySelectorAll('.project-card').forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        if (filterValue === 'all' || filterValue === category) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                }
-                currentIndex = 0; // Reset index on resize to prevent issues
+        // Next button click handler
+        nextBtn.addEventListener('click', function() {
+            if (isAnimating) return;
+            
+            const visibleCards = getVisibleCards();
+            const cardsPerView = getCardsPerView();
+            const maxIndex = Math.max(0, visibleCards.length - cardsPerView);
+            
+            if (currentIndex < maxIndex) {
+                isAnimating = true;
+                currentIndex++;
                 updateCarousel();
-            });
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 400);
+            }
+        });
+
+        // Previous button click handler
+        prevBtn.addEventListener('click', function() {
+            if (isAnimating) return;
+            
+            if (currentIndex > 0) {
+                isAnimating = true;
+                currentIndex--;
+                updateCarousel();
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 400);
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            track.style.transition = 'none';
+        });
+
+        track.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const diffX = startX - currentX;
+            const diffY = startY - currentY;
+            
+            // Only handle horizontal swipes
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                e.preventDefault();
+                
+                const visibleCards = getVisibleCards();
+                if (visibleCards.length === 0) return;
+                
+                const cardWidth = visibleCards[0].offsetWidth + 
+                                 parseInt(getComputedStyle(visibleCards[0]).marginLeft) + 
+                                 parseInt(getComputedStyle(visibleCards[0]).marginRight);
+                
+                const currentTranslate = -(currentIndex * cardWidth);
+                const newTranslate = currentTranslate - diffX;
+                
+                track.style.transform = `translateX(${newTranslate}px)`;
+            }
+        });
+
+        track.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            const threshold = 50; // Minimum swipe distance
+            
+            if (Math.abs(diffX) > threshold) {
+                if (diffX > 0) {
+                    // Swipe left - next
+                    nextBtn.click();
+                } else {
+                    // Swipe right - previous
+                    prevBtn.click();
+                }
+            } else {
+                // Snap back to current position
+                updateCarousel();
+            }
+        });
+
+        // Auto-play functionality
+        function startAutoPlay() {
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+            
+            autoPlayInterval = setInterval(() => {
+                const visibleCards = getVisibleCards();
+                const cardsPerView = getCardsPerView();
+                const maxIndex = Math.max(0, visibleCards.length - cardsPerView);
+                
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; // Loop back to start
+                }
+                updateCarousel();
+            }, 5000); // Change slide every 5 seconds
         }
 
-        // Filter functionality
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+
+        // Pause auto-play on hover/touch
+        track.addEventListener('mouseenter', stopAutoPlay);
+        track.addEventListener('mouseleave', startAutoPlay);
+        track.addEventListener('touchstart', stopAutoPlay);
+        track.addEventListener('touchend', () => {
+            setTimeout(startAutoPlay, 3000); // Resume after 3 seconds
+        });
+
+        // Initialize carousel
+        updateCarousel(false);
+        startAutoPlay();
+
+        // Update on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                currentIndex = 0; // Reset index on resize
+                updateCarousel(false);
+            }, 250);
+        });
+
+        // Enhanced Filter functionality
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
@@ -89,14 +210,26 @@
 
                 const filterValue = this.getAttribute('data-filter');
 
-                // Filter projects
-                projectCards.forEach(card => {
+                // Filter projects with smooth animation
+                projectCards.forEach((card, index) => {
                     const category = card.getAttribute('data-category');
+                    const isVisible = filterValue === 'all' || filterValue === category;
 
-                    if (filterValue === 'all' || filterValue === category) {
+                    if (isVisible) {
                         card.style.display = 'flex';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 50);
                     } else {
-                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
                     }
                 });
 
@@ -104,15 +237,25 @@
                 if (window.getComputedStyle(document.querySelector('.mobile-carousel')).display !== 'none') {
                     currentIndex = 0;
                     // Ensure cards are filtered before updating carousel
-                    setTimeout(updateCarousel, 0); // Use setTimeout to ensure DOM updates first
+                    setTimeout(() => {
+                        updateCarousel(false);
+                        startAutoPlay(); // Restart auto-play after filtering
+                    }, 100);
                 }
             });
         });
 
         // Initial display of all cards (ensure they are 'flex' for carousel calculation)
-        projectCards.forEach(card => card.style.display = 'flex');
+        projectCards.forEach(card => {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        });
+        
         // Initial carousel update for "All" category
-        updateCarousel();
+        setTimeout(() => {
+            updateCarousel(false);
+        }, 100);
 
         // Modal functionality
         const modalOverlay = document.getElementById('caseStudyModal');

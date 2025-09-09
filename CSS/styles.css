@@ -2295,12 +2295,14 @@
             border-radius: var(--radius-xl);
             position: relative;
             margin: 0 var(--spacing-lg);
+            touch-action: pan-y; /* Allow vertical scrolling but handle horizontal swipes */
         }
 
         .projects-carousel-track {
             display: flex;
-            transition: transform var(--transition-normal);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
+            will-change: transform; /* Optimize for animations */
         }
 
         .project-card {
@@ -2315,12 +2317,31 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            min-width: 0; /* Prevent flex items from overflowing */
         }
+        
+        /* Mobile responsive card sizing */
         @media (max-width: 768px) {
+<<<<<<< HEAD
           .projects-grid.mobile-carousel .project-card {
             flex: 0 0 calc(100% - 50px); /* Show one card with side padding */
             margin: 0 20px; /* Adjust margin for spacing */
           }
+=======
+            .projects-grid.mobile-carousel .project-card {
+                flex: 0 0 calc(100% - 40px); /* Show one card with side padding */
+                margin: 0 20px; /* Adjust margin for spacing */
+                min-height: 400px; /* Ensure consistent height */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid.mobile-carousel .project-card {
+                flex: 0 0 calc(100% - 20px); /* Less padding on small screens */
+                margin: 0 10px;
+                min-height: 380px;
+            }
+>>>>>>> 8e8837c781fcc434cc0ad4781abb96c641a70832
         }
 
         .project-card:hover {
@@ -2467,22 +2488,32 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all var(--transition-normal);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 18px;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .projects-carousel-nav:hover {
+        .projects-carousel-nav:hover:not(:disabled) {
             background: var(--primary-color);
             transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .projects-carousel-nav:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
+            background: rgba(37, 99, 235, 0.3);
         }
 
         .projects-carousel-nav:disabled:hover {
             transform: scale(1);
+            background: rgba(37, 99, 235, 0.3);
+        }
+
+        .projects-carousel-nav:active:not(:disabled) {
+            transform: scale(0.95);
         }
 
         /* Navigation Controls Container */
@@ -2793,7 +2824,7 @@
             }
 
             .project-image {
-                height: 160px;
+                height: 180px; /* Slightly larger for better visibility */
             }
 
             .project-info {
@@ -2801,13 +2832,31 @@
             }
 
             .projects-carousel-nav {
-                width: 35px;
-                height: 35px;
-                font-size: 14px;
+                width: 40px; /* Slightly larger for better touch targets */
+                height: 40px;
+                font-size: 16px;
             }
 
             .projects-carousel-controls {
-                gap: var(--spacing-sm);
+                gap: var(--spacing-md); /* More space between buttons */
+                margin-top: var(--spacing-lg);
+            }
+
+            /* Improve touch targets */
+            .project-card {
+                touch-action: manipulation; /* Prevent double-tap zoom */
+            }
+
+            /* Better spacing for mobile */
+            .project-filters {
+                gap: var(--spacing-xs);
+                margin-bottom: var(--spacing-lg);
+            }
+
+            .filter-btn {
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-size: 0.85rem;
+                min-height: 44px; /* iOS recommended touch target size */
             }
 
             .modal-header {
