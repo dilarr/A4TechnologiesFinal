@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A4Technologies</title>
+    <link rel="icon" type="image/png" href="./Images/logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />  
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="has-topbar">
+  <!-- Loader -->
+  <div id="loading" class="site-loader" aria-hidden="true">
+    <div class="loader-content">
+      <img src="./Images/logo.png" alt="A4Technologies" class="loader-logo"/>
+      <div class="loader-ring"></div>
+      <p class="loader-text">Loading experience…</p>
+    </div>
+  </div>
+
+  <!-- Top Contact Bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <span><i class="fas fa-phone"></i> +61 427 031 455</span>
+        <span><i class="fas fa-envelope"></i>services@a4technologies.com.au</span>
+        <span class="hide-sm"><i class="fas fa-map"></i>Australia.</span>
+      </div>
+      <div class="topbar-right">
+        <!-- <a href="#" aria-label="Instagram" class="social"><i class="fab fa-instagram"></i></a> -->
+        <a href="https://web.facebook.com/profile.php?id=61578852504611" aria-label="Facebook" class="social"><i class="fab fa-facebook-f"></i></a>
+        <!-- <a href="#" aria-label="LinkedIn" class="social"><i class="fab fa-linkedin-in"></i></a> -->
+        <!-- <a href="#" aria-label="Google" class="social"><i class="fab fa-google"></i></a> -->
+      </div>
+    </div>
+  </div>
+    
+<!-- Background Slideshow -->
+    <div class="slideshow-container">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2000&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2000&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2000&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=2000&auto=format&fit=crop')"></div>
+    </div>
+
+    <!-- Animated Background Overlay -->
+    <div class="bg-overlay"></div>
+    <div class="floating-shapes">
+        <div class="shape" style="width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: -2s;"></div>
+        <div class="shape" style="width: 120px; height: 120px; top: 70%; right: 10%; animation-delay: -8s;"></div>
+        <div class="shape" style="width: 60px; height: 60px; top: 30%; right: 30%; animation-delay: -4s;"></div>
+        <div class="shape" style="width: 100px; height: 100px; bottom: 20%; left: 20%; animation-delay: -6s;"></div>
+    </div>
+
+    <!-- Navigation - Clean and Simple -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <!-- Logo and Company Name -->
+            <div class="navbar-brand">
+              <img src="./Images/logo.png" alt="A4Technologies Logo" class="nav-logo" />
+                <div class="logo">A4Technologies</div>
+            </div>
+            
+            <!-- Desktop Navigation Links and CTA -->
+            <div class="navbar-right-items">
+              <ul class="nav-links">
+                  <li><a href="#home" class="nav-link">Home</a></li>
+                  <li><a href="#services" class="nav-link">Services</a></li>
+                  <li><a href="#about" class="nav-link">About</a></li>
+                  <li><a href="#contact" class="nav-link">Contact</a></li>
+              </ul>
+              <!-- Desktop CTA -->
+              <a href="#contact" class="contact-cta contact-cta-desktop">Contact Now</a>
+            </div>
+           
+            <!-- Mobile Menu Toggle -->
+            <div class="mobile-menu" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Mobile Navigation -->
+    <div class="mobile-nav-overlay" id="mobileNav">
+        <div class="mobile-nav-content">
+            <!-- Mobile Navigation Links -->
+            <ul class="mobile-nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <!-- Mobile Contact Details -->
+            <div class="mobile-contact">
+                <div class="mobile-contact-row"><i class="fas fa-phone"></i><a href="tel:+61 427 031 455">+61 427 031 455</a></div>
+                <div class="mobile-contact-row"><i class="fas fa-envelope"></i><a href="mailto:services@a4technologies.com.au">services@a4technologies.com.au</a></div>
+                <div class="mobile-contact-row"><i class="fas fa-location"></i><span>Australia.</span></div>
+                <div class="mobile-contact-socials">
+                    <!-- <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> -->
+                    <a href="https://web.facebook.com/profile.php?id=61578852504611" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <!-- <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> -->
+                    <!-- <a href="#" aria-label="Google"><i class="fab fa-google"></i></a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to A4Technologies</h1>
+            <p class="hero-sub">Engineering modern software that scales with your ambition.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Get Started
+                </a>
+                <a href="#services" class="btn btn-secondary">
+                    <i class="fas fa-eye"></i>
+                    Explore
+                </a>
+            </div>
+        </div>
+    </section>
+     <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <!-- <p class="section-subtitle">Comprehensive digital solutions tailored to your needs</p> -->
+            </div>
+            <div class="services-container">
+                <div class="services-grid" id="servicesGrid">
+                    <!-- Slide 1: Cards 1-3 -->
+                    <div class="slide-group">
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Web Development">
+                                <div class="service-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Application Development</h3>
+                                <!-- <p class="service-tagline">Design, build, and ship robust apps fast.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="IT Support">
+                                <div class="service-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>IT Support</h3>
+                                <!-- <p class="service-tagline">Reliable helpdesk and maintenance—anytime.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="AI and Automation">
+                                <div class="service-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>AI and Automation</h3>
+                                <!-- <p class="service-tagline">Automate workflows and unlock insights.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Cards 4-6 -->
+                    <div class="slide-group">
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Digital Marketing">
+                                <div class="service-icon">
+                                    <i class="fas fa-bullhorn"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Website and Social Media Marketing</h3>
+                                <!-- <p class="service-tagline">Grow reach with content, SEO, and campaigns.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Network Setup">
+                                <div class="service-icon">
+                                   <i class="fas fa-network-wired"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Internet and Network Setup</h3>
+                                <!-- <p class="service-tagline">Fast, secure connectivity for home and business.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Computer Setup">
+                                <div class="service-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Desktop / Laptop Setup and Updating</h3>
+                                <!-- <p class="service-tagline">New device setup, migrate, and optimize.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Cards 7-9 -->
+                    <div class="slide-group">
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Security Audit">
+                                <div class="service-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>IT Security and Security Audit</h3>
+                                <!-- <p class="service-tagline">Assess, harden, and monitor your stack.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Email Communication">
+                                <div class="service-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Email and Communication</h3>
+                                <!-- <p class="service-tagline">Professional email and team collaboration.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-image">
+                                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Document Management">
+                                <div class="service-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <div class="service-content">
+                                <h3>Document Management</h3>
+                                <!-- <p class="service-tagline">Digitize, organize, and automate workflows.</p> -->
+                                <button class="read-more-btn">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation buttons -->
+                <div class="nav-buttons">
+                    <button class="nav-btn prev" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button class="nav-btn next" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Dots indicator -->
+                <div class="dots-container" id="dotsContainer"></div>
+            </div>
+        </div>
+    </section>
+
+ <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <!-- Enhanced Section Header -->
+            <div class="section-header">
+                <!-- <div class="section-badge">About A4Technologies</div> -->
+                <h2 class="section-title">Building the future, one innovation at a time</h2>
+                <!-- <p class="section-subtitle">Transforming ideas into powerful digital solutions since 2018</p> -->
+                <!-- <p class="section-subtitle">
+                    Transform your business with cutting-edge software solutions. We create innovative, scalable, and user-centric applications that drive growth and deliver exceptional experiences.
+                </p> -->
+                <div class="header-decoration"></div>
+            </div>
+
+            <!-- Company Overview -->
+            <div class="company-overview">
+                <div class="overview-content">
+                    <div class="overview-text">
+                        <h3>Empowering Businesses Through Technology</h3>
+                        <p>At A4Technologies, we believe that technology should simplify your life, not complicate it. Since our founding in 2018, we've been dedicated to creating innovative digital solutions that help businesses thrive in an increasingly connected world.</p>
+                        <p>Our team of passionate developers, designers, and strategists work collaboratively to turn your vision into reality. We specialize in custom software development, mobile applications, cloud solutions, and digital transformation services that drive real business value.</p>
+                        <!-- <p>From startups to enterprise clients across 15+ countries, we've helped over 500 businesses overcome their technological challenges and achieve their goals through strategic innovation and exceptional execution.</p> -->
+                    </div>
+                   <div class="overview-image">
+                   <img src="./Video/A4technologies.gif" alt="A4Technologies team collaboration">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section 123 -->
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trusted by Industry Leaders</h2>
+                <!-- <p class="section-subtitle">Brands and teams we helped ship and scale to millions of users worldwide</p> -->
+            </div>
+            
+            <div class="clients-container">
+                <div class="clients-viewport">
+                    <div class="clients-track" id="clientsTrack">
+                        <!-- Original client logos -->
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/1.png" alt="Google"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/2.png" alt="Amazon Web Services"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/3.png" alt="Microsoft"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/4.png" alt="Apple"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/5.png" alt="Meta"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/6.png" alt="Google"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/7.png" alt="Amazon Web Services"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/8.png" alt="Microsoft"></a></div>
+                        
+                        <!-- Duplicated logos for seamless loop -->
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/1.png" alt="Google"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/2.png" alt="Amazon Web Services"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/3.png" alt="Microsoft"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/4.png" alt="Apple"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/5.png" alt="Meta"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/6.png" alt="Google"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/7.png" alt="Amazon Web Services"></a></div>
+                        <div class="client-item"><a href=""><img src="./Images/ClientsLogo/8.png" alt="Microsoft"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Projects</h2>
+                <p class="section-subtitle">Showcasing our latest work and achievements</p>
+            </div>
+            
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="application">Application Development</button>
+                <button class="filter-btn" data-filter="security">ICT Security</button>
+                <button class="filter-btn" data-filter="infrastructure">Infrastructure Upgrade</button>
+                <button class="filter-btn" data-filter="document">Document Management</button>
+                <button class="filter-btn" data-filter="management">ICT Management</button>
+            </div>
+
+            <!-- Desktop Grid -->
+            <div class="projects-grid desktop-grid">
+                <!-- Application Development -->
+                <div class="project-card" data-category="application" data-case="1">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Application Development">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" ><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/8.png" alt="Client Logo 1">
+                        </div>
+                        <h3>Application Development</h3>
+                        <p>Custom CRM solution for Swiss Heritage that streamlined their customer management process and improved sales tracking.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="1" >Read More</a>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Upgrade -->
+                <div class="project-card" data-category="infrastructure" data-case="2">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Infrastructure Upgrade">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" data-case="2"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/7.png" alt="Client Logo 2">
+                        </div>
+                        <h3>IT Infrastructure Support</h3>
+                        <p>Complete network infrastructure overhaul for BusinessPlex including Ubiquiti deployment and security enhancements.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="2">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Document Management -->
+                <div class="project-card" data-category="document" data-case="3">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Document Management">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" data-case="3"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/5.png" alt="Client Logo 3">
+                        </div>
+                        <h3>SharePoint and OneDrive</h3>
+                        <p>Implemented a secure document management system for Southbank Montessori with automated backup solutions.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="3">Read More</a>
+                    </div>
+                </div>
+
+                <!-- ICT Security -->
+                <div class="project-card" data-category="security" data-case="4">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ICT Security">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" data-case="4"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/7.png" alt="Client Logo 4">
+                        </div>
+                        <h3>Cyber Security Audit</h3>
+                        <p>Comprehensive security assessment and implementation of advanced protection measures for client infrastructure.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="4">Read More</a>
+                    </div>
+                </div>
+
+                <!-- ICT Management -->
+                <div class="project-card" data-category="management" data-case="5">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ICT Management">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" data-case="5"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/4.png" alt="Client Logo 5">
+                        </div>
+                        <h3>IT Service Desk Operations</h3>
+                        <p>Managed service desk implementation for Southbank Montessori providing 24/7 remote support and management.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="5">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Document Management (Second Project) -->
+                <div class="project-card" data-category="document" data-case="6">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Microsoft 365 Configuration">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link view-case-study" data-case="6"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-info-container">
+                        <div class="project-client-logo">
+                            <img src="./Images/ClientsLogo/8.png" alt="Client Logo 6">
+                        </div>
+                        <h3>Microsoft 365 Configuration</h3>
+                        <p>Seamless migration and configuration of Microsoft 365 environment with SharePoint integration for Swiss Heritage.</p>
+                        <a href="#" class="read-more-btn view-case-study" data-case="6">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Carousel -->
+            <div class="projects-grid mobile-carousel">
+                <div class="projects-carousel-container">                   
+                    <div class="projects-carousel-track" id="projectsCarouselTrack">
+                        <!-- Application Development -->
+                        <div class="project-card" data-category="application" data-case="1">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Application Development">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="1"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/1.png" alt="Client Logo 1">
+                                </div>
+                                <h3>Application Development</h3>
+                                <p>Custom CRM solution for Swiss Heritage that streamlined their customer management process.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="1">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- Infrastructure Upgrade -->
+                        <div class="project-card" data-category="infrastructure" data-case="2">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Infrastructure Upgrade">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="2"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/2.png" alt="Client Logo 2">
+                                </div>
+                                <h3>IT Infrastructure Support</h3>
+                                <p>Complete network infrastructure overhaul for BusinessPlex with security enhancements.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="2">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- Document Management -->
+                        <div class="project-card" data-category="document" data-case="3">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Document Management">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="3"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/3.png" alt="Client Logo 3">
+                                </div>
+                                <h3>SharePoint and OneDrive</h3>
+                                <p>Secure document management system for Southbank Montessori with automated backups.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="3">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- ICT Security -->
+                        <div class="project-card" data-category="security" data-case="4">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ICT Security">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="4"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/4.png" alt="Client Logo 4">
+                                </div>
+                                <h3>Cyber Security Audit</h3>
+                                <p>Comprehensive security assessment and implementation of advanced protection measures.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="4">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- ICT Management -->
+                        <div class="project-card" data-category="management" data-case="5">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="ICT Management">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="5"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/5.png" alt="Client Logo 5">
+                                </div>
+                                <h3>IT Service Desk Operations</h3>
+                                <p>Managed service desk implementation providing 24/7 remote support and management.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="5">Read More</a>
+                            </div>
+                        </div>
+
+                        <!-- Document Management (Second Project) -->
+                        <div class="project-card" data-category="document" data-case="6">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Microsoft 365 Configuration">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link view-case-study" data-case="6"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-container">
+                                <div class="project-client-logo">
+                                    <img src="./Images/ClientsLogo/6.png" alt="Client Logo 6">
+                                </div>
+                                <h3>Microsoft 365 Configuration</h3>
+                                <p>Seamless migration and configuration of Microsoft 365 environment with SharePoint.</p>
+                                <a href="#" class="read-more-btn view-case-study" data-case="6">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Controls -->
+                <div class="projects-carousel-controls">
+                    <button class="projects-carousel-nav prev" id="projectsPrevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button class="projects-carousel-nav next" id="projectsNextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Modals - ENHANCED -->
+    <div class="modal-overlay" id="caseStudyModal">
+        <div class="case-study-modal">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Case Study">
+                <div class="modal-header-content">
+                    <div class="client-logo">
+                        <img id="modalLogo" src="" alt="Client Logo">
+                    </div>
+                    <div class="modal-titles">
+                        <h2 class="modal-title" id="modalTitle"></h2>
+                        <p class="modal-subtitle" id="modalSubtitle"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Client & Challenge - Issue
+                    </h3>
+                    <div class="modal-section-content" id="modalClient"></div>
+                </div>
+                <div class="modal-section">
+                    <h3 class="modal-section-title">
+                        <i class="fas fa-lightbulb"></i>
+                        A4Technologies Approach
+                    </h3>
+                    <ul class="approach-list" id="modalApproach"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Technologies Section -->
+    <section id="technologies" class="technologies">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technologies We Use</h2>
+                <p class="section-subtitle">Cutting-edge tools and frameworks for modern development</p>
+            </div>
+            
+            <div class="tech-categories">
+                <!-- Frontend Development - Moving Left -->
+                <div class="tech-category">
+                    <h3>Frontend Development</h3>
+                    <div class="tech-slider move-left">
+                        <div class="tech-track">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-react"></i>
+                                </div>
+                                <h4>React</h4>
+                                <p>Modern UI development with component-based architecture</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-vuejs"></i>
+                                </div>
+                                <h4>Vue.js</h4>
+                                <p>Progressive framework for building user interfaces</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-angular"></i>
+                                </div>
+                                <h4>Angular</h4>
+                                <p>Platform for building mobile and desktop applications</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-js"></i>
+                                </div>
+                                <h4>JavaScript</h4>
+                                <p>ES6+ features and modern JavaScript patterns</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <h4>HTML5</h4>
+                                <p>Semantic markup and modern web standards</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-css3-alt"></i>
+                                </div>
+                                <h4>CSS3</h4>
+                                <p>Advanced styling with animations and responsive design</p>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-react"></i>
+                                </div>
+                                <h4>React</h4>
+                                <p>Modern UI development with component-based architecture</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-vuejs"></i>
+                                </div>
+                                <h4>Vue.js</h4>
+                                <p>Progressive framework for building user interfaces</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-angular"></i>
+                                </div>
+                                <h4>Angular</h4>
+                                <p>Platform for building mobile and desktop applications</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-js"></i>
+                                </div>
+                                <h4>JavaScript</h4>
+                                <p>ES6+ features and modern JavaScript patterns</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Development - Moving Right -->
+                <div class="tech-category">
+                    <h3>Backend Development</h3>
+                    <div class="tech-slider move-right">
+                        <div class="tech-track">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-node-js"></i>
+                                </div>
+                                <h4>Node.js</h4>
+                                <p>Server-side JavaScript runtime environment</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-python"></i>
+                                </div>
+                                <h4>Python</h4>
+                                <p>Django and Flask for robust backend solutions</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-java"></i>
+                                </div>
+                                <h4>Java</h4>
+                                <p>Spring Boot for enterprise applications</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h4>Databases</h4>
+                                <p>MongoDB, PostgreSQL, MySQL, Redis</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-php"></i>
+                                </div>
+                                <h4>PHP</h4>
+                                <p>Laravel and Symfony for web applications</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-server"></i>
+                                </div>
+                                <h4>Express.js</h4>
+                                <p>Fast, unopinionated web framework for Node.js</p>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-node-js"></i>
+                                </div>
+                                <h4>Node.js</h4>
+                                <p>Server-side JavaScript runtime environment</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-python"></i>
+                                </div>
+                                <h4>Python</h4>
+                                <p>Django and Flask for robust backend solutions</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-java"></i>
+                                </div>
+                                <h4>Java</h4>
+                                <p>Spring Boot for enterprise applications</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h4>Databases</h4>
+                                <p>MongoDB, PostgreSQL, MySQL, Redis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud & DevOps - Moving Right -->
+                <div class="tech-category">
+                    <h3>Microsoft</h3>
+                    <div class="tech-slider move-left">
+                        <div class="tech-track">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-aws"></i>
+                                </div>
+                                <h4>AWS</h4>
+                                <p>Cloud infrastructure and services</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-docker"></i>
+                                </div>
+                                <h4>Docker</h4>
+                                <p>Containerization and deployment</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-github"></i>
+                                </div>
+                                <h4>GitHub</h4>
+                                <p>Version control and CI/CD pipelines</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-kubernetes"></i>
+                                </div>
+                                <h4>Kubernetes</h4>
+                                <p>Container orchestration and scaling</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-google"></i>
+                                </div>
+                                <h4>Google Cloud</h4>
+                                <p>Scalable cloud computing solutions</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <h4>Azure</h4>
+                                <p>Microsoft cloud platform and services</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <h4>Microsoft 365</h4>
+                                <p>Productivity cloud suite</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h4>Exchange</h4>
+                                <p>Email and calendaring server</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4>Microsoft Defender</h4>
+                                <p>Enterprise security suite</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-windows"></i>
+                                </div>
+                                <h4>Windows 10/11</h4>
+                                <p>Operating systems</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h4>Microsoft CRM</h4>
+                                <p>Customer relationship management</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-share-alt"></i>
+                                </div>
+                                <h4>SharePoint</h4>
+                                <p>Collaboration and document management</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-cloud"></i>
+                                </div>
+                                <h4>OneDrive</h4>
+                                <p>Cloud storage service</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4>Copilot</h4>
+                                <p>AI-powered assistant</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h4>Power Apps</h4>
+                                <p>Low-code development platform</p>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-aws"></i>
+                                </div>
+                                <h4>AWS</h4>
+                                <p>Cloud infrastructure and services</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-docker"></i>
+                                </div>
+                                <h4>Docker</h4>
+                                <p>Containerization and deployment</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-github"></i>
+                                </div>
+                                <h4>GitHub</h4>
+                                <p>Version control and CI/CD pipelines</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fab fa-kubernetes"></i>
+                                </div>
+                                <h4>Kubernetes</h4>
+                                <p>Container orchestration and scaling</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Networking - Moving Left -->
+                <div class="tech-category">
+                    <h3>Networking</h3>
+                    <div class="tech-slider move-right">
+                        <div class="tech-track">
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <h4>Ubiquiti</h4>
+                                <p>Networking technology products</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <h4>Cisco</h4>
+                                <p>Networking hardware solutions</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <h4>Sonic Firewalls</h4>
+                                <p>Network security appliances</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4>Palo Alto</h4>
+                                <p>Cybersecurity solutions</p>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-wifi"></i>
+                                </div>
+                                <h4>Ubiquiti</h4>
+                                <p>Networking technology products</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <h4>Cisco</h4>
+                                <p>Networking hardware solutions</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <h4>Sonic Firewalls</h4>
+                                <p>Network security appliances</p>
+                            </div>
+                            <div class="tech-item">
+                                <div class="tech-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h4>Palo Alto</h4>
+                                <p>Cybersecurity solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Ready to start your next project? Let's talk!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=services@a4technologies.com.au">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>services@a4technologies.com.au</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="contact-item">
+                        <a href="tel:+61427031455">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <p>+61 427 031 455</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="contact-item">
+                        <a href="">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Location</h3>
+                                <p>Australia.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2 class="form-title">Contact Us</h2>
+                    <form id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <br>
+                        <div class="form-group full-width">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span id="btnText">Send Message</span>
+                            <div class="loading" id="loading">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                    </form>
+                    <div class="message" id="messageDiv"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+           <div class="footer-logo">             
+          <div class="logo-container">
+            <img src="./Images/logo.png" alt="A4Technologies Logo" class="footer-logo-img">
+            <h3>A4Technologies</h3>
+          </div>
+            <p>Innovative digital solutions for modern businesses. We transform ideas into powerful digital experiences with cutting-edge technology and creative design.</p>
+          </div>
+          <div class="social-links">
+            <a href="https://web.facebook.com/profile.php?id=61578852504611" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+           <a href="https://wa.me/+61427031455?text=Hello%20A4%20Technologies%2C%20I%20would%20like%20to%20inquire%20about%20your%20software%20services." 
+   target="_blank" 
+   aria-label="WhatsApp" 
+   rel="noopener noreferrer">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+            <!-- <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a> -->
+            <!-- <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a> -->
+            <!-- <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a> -->
+           <a href="https://mail.google.com/mail/?view=cm&fs=1&to=services@a4technologies.com.au" aria-label="Email"><i class="fas fa-envelope"></i></a>
+
+
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Document Management</a></li>
+            <li><a href="#services">Email and Communication</a></li>
+            <li><a href="#services">IT Security and Security Audit</a></li>
+            <li><a href="#services">Internet and Network Setup</a></li>
+            <li><a href="#services">Desktop / Laptop Setup and updating</a></li>
+            <li><a href="#services">Website and Social media marketing</a></li>
+             <li><a href="#services">Application Development</a></li>
+              <li><a href="#services">AI and Automation</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#technologies">Technologies</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+      </div>
+      
+      <!-- Back to Top Button -->
+      <!-- <div class="back-to-top">
+        <a href="#home" class="btn-back-to-top" id="backToTop">
+          <i class="fas fa-arrow-up"></i>
+          <span>Back to Home</span>
+        </a>
+      </div> -->
+      
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <p>&copy; 2025 A4Technologies. All rights reserved. Development by <span><b> A4Terchnologies.</b></span></p>
+      </div>
+    </div>
+  </footer>
+     <script src="./Script/script.js"></script>
+     <!-- <script src="./A4technologies/Script/Mouse.js"></script> -->
+     <script src="./Script/services.js"></script>
+     <script src="./Script/menu.js"></script>
+     <script src="./Script/problem.js"></script>
+     <script src="./Script/project.js"></script>
+     <script src="./Script/testamonial.js"></script>
+ 
+</body>
+</html>
