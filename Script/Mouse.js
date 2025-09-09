@@ -492,23 +492,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   let mouseEffect;
 
-  if (
-    body.classList.contains("tech-startup") ||
-    body.dataset.theme === "startup"
-  ) {
-    mouseEffect = initTechStartupMouse();
-  } else if (
-    body.classList.contains("corporate") ||
-    body.dataset.theme === "corporate"
-  ) {
-    mouseEffect = initCorporateMouse();
-  } else {
-    // Default software company theme
-    mouseEffect = initSoftwareCompanyMouse();
-  }
+  // if (
+  //   body.classList.contains("tech-startup") ||
+  //   body.dataset.theme === "startup"
+  // ) {
+  //   mouseEffect = initTechStartupMouse();
+  // } else if (
+  //   body.classList.contains("corporate") ||
+  //   body.dataset.theme === "corporate"
+  // ) {
+  //   mouseEffect = initCorporateMouse();
+  // } else {
+  //   // Default software company theme
+  //   mouseEffect = initSoftwareCompanyMouse();
+  // }
 
   // Make it globally accessible
-  window.mouseEffect = mouseEffect;
+  // window.mouseEffect = mouseEffect;
+
+  // Disable the mouse effect
+  if (window.mouseEffect) {
+    window.mouseEffect.disable();
+  }
+
+  // We also need to hide the cursor if it was set to none
+  document.body.style.cursor = "auto";
 });
 
 // ===== ADDITIONAL FEATURES =====

@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Enable cursor trail on desktop only
     if (window.innerWidth > 768) {
-        createCursorTrail();
+        // createCursorTrail(); // Commented out to disable cursor trail
     }
     
     // Mobile menu functionality
