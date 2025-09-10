@@ -138,7 +138,7 @@
                 <div class="services-grid" id="servicesGrid">
                     <!-- Desktop: Slide 1: Cards 1-3 -->
                     <div class="slide-group">
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Application Development">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Web Development">
                                 <div class="service-icon">
@@ -151,7 +151,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="IT Support">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="IT Support">
                                 <div class="service-icon">
@@ -164,7 +164,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="AI and Automation">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="AI and Automation">
                                 <div class="service-icon">
@@ -181,7 +181,7 @@
                     
                     <!-- Desktop: Slide 2: Cards 4-6 -->
                     <div class="slide-group">
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Website and Social Media Marketing">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Digital Marketing">
                                 <div class="service-icon">
@@ -194,7 +194,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Internet and Network Setup">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Network Setup">
                                 <div class="service-icon">
@@ -207,7 +207,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Desktop / Laptop Setup and Updating">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Computer Setup">
                                 <div class="service-icon">
@@ -224,7 +224,7 @@
                     
                     <!-- Desktop: Slide 3: Cards 7-9 -->
                     <div class="slide-group">
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="IT Security and Security Audit">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Security Audit">
                                 <div class="service-icon">
@@ -237,7 +237,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Email and Communication">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Email Communication">
                                 <div class="service-icon">
@@ -250,7 +250,7 @@
                                 <button class="read-more-btn">Read More</button>
                             </div>
                         </div>
-                        <div class="service-card">
+                        <div class="service-card" data-service-title="Document Management">
                             <div class="service-image">
                                 <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Document Management">
                                 <div class="service-icon">
@@ -1448,18 +1448,28 @@
 
           </div>
         </div>
-        <div class="footer-section">
-          <h4>Services</h4>
+        
+         <div class="footer-section footer-services-1">
+          <h4>Services 1</h4>
           <ul>
-            <li><a href="#services">Document Management</a></li>
-            <li><a href="#services">Email and Communication</a></li>
-            <li><a href="#services">IT Security and Security Audit</a></li>
-            <li><a href="#services">Internet and Network Setup</a></li>
-            <li><a href="#services">Desktop / Laptop Setup and updating</a></li>
-            <li><a href="#services">Website and Social media marketing</a></li>
-             <li><a href="#services">Application Development</a></li>
-              <li><a href="#services">AI and Automation</a></li>
-              <li><a href="#services">IT Support</a></li>
+            <li><a href="#services" data-target="Document Management">Document Management</a></li>
+            <li><a href="#services" data-target="Email and Communication">Email and Communication</a></li>
+            <li><a href="#services" data-target="IT Security and Security Audit">IT Security and Security Audit</a></li>
+            <li><a href="#services" data-target="Internet and Network Setup">Internet and Network Setup</a></li>
+            <li><a href="#services" data-target="Desktop / Laptop Setup and Updating">Desktop / Laptop Setup and updating</a></li>
+            <li class="footer-mobile-only"><a href="#services" data-target="Website and Social Media Marketing">Website and Social media marketing</a></li>
+            <li class="footer-mobile-only"><a href="#services" data-target="Application Development">Application Development</a></li>
+            <li class="footer-mobile-only"><a href="#services" data-target="AI and Automation">AI and Automation</a></li>
+            <li class="footer-mobile-only"><a href="#services" data-target="IT Support">IT Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-section footer-services-2">
+          <h4>Services 2</h4>
+          <ul>
+            <li><a href="#services" data-target="Website and Social Media Marketing">Website and Social media marketing</a></li>
+            <li><a href="#services" data-target="Application Development">Application Development</a></li>
+            <li><a href="#services" data-target="AI and Automation">AI and Automation</a></li>
+            <li><a href="#services" data-target="IT Support">IT Support</a></li>
           </ul>
         </div>
         <div class="footer-section">

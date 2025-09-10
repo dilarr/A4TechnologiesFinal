@@ -18,6 +18,7 @@ class ServicesCarousel {
         
         this.init();
         this.bindReadMoreButtons();
+        this.bindFooterServiceLinks();
         this.handleResize();
     }
     
@@ -99,8 +100,9 @@ class ServicesCarousel {
         let translateX = 0;
         
         if (this.isMobile) {
-            // Mobile: move exactly one card width per step (11.111% per card)
-            translateX = -(this.currentIndex * 11.111);
+            // Mobile: move exactly one card width per step, computed precisely
+            const perSlidePercent = 100 / this.totalSlides; // avoids rounding issues
+            translateX = -(this.currentIndex * perSlidePercent);
         } else if (this.isTablet) {
             // Tablet: move two card widths per step (22.222% per slide)
             translateX = -(this.currentIndex * 22.222);
@@ -228,6 +230,9 @@ class ServicesCarousel {
             }
         ];
 
+        // Expose details for use from footer links and other triggers
+        this.serviceDetails = serviceDetails;
+
         readMoreBtns.forEach((btn, index) => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -237,6 +242,28 @@ class ServicesCarousel {
                     this.showServiceDetails(serviceDetails[index]);
                 } else {
                     console.error(`Service details not found for index: ${index}`);
+                }
+            });
+        });
+    }
+
+    bindFooterServiceLinks() {
+        // Footer service links trigger corresponding popup
+        const footerServiceLinks = document.querySelectorAll('footer a[data-target]');
+        footerServiceLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const title = link.getAttribute('data-target');
+                if (!title) return;
+                e.preventDefault();
+                // Make sure the services section is in view so the in-section modal is visible
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                    // Account for fixed topbar/nav using CSS scroll-margin on #services
+                    servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Open shortly after scrolling starts to ensure visibility
+                    setTimeout(() => this.showServicePopupByTitle(title), 200);
+                } else {
+                    this.showServicePopupByTitle(title);
                 }
             });
         });
@@ -269,10 +296,11 @@ class ServicesCarousel {
     }
 
     showServiceDetails(service) {
-        // Create modal overlay
+        // Create modal overlay within Services section to prevent page scroll/jump
+        const servicesSection = document.getElementById('services');
         const modal = document.createElement('div');
         modal.style.cssText = `
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -368,23 +396,21 @@ class ServicesCarousel {
         `;
 
         modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-
-        // Prevent body scrolling when modal is open
-        const originalOverflow = document.body.style.overflow;
-        const originalPosition = document.body.style.position;
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
+        // Ensure services section is a positioning context
+        const previousSectionPosition = servicesSection.style.position;
+        if (getComputedStyle(servicesSection).position === 'static') {
+            servicesSection.style.position = 'relative';
+        }
+        servicesSection.appendChild(modal);
 
         // Close modal events
         const closeBtn = modalContent.querySelector('#closeModal');
         const closeModal = () => {
-            document.body.removeChild(modal);
-            // Restore body scrolling
-            document.body.style.overflow = originalOverflow;
-            document.body.style.position = originalPosition;
-            document.body.style.width = '';
+            if (modal.parentElement) {
+                modal.parentElement.removeChild(modal);
+            }
+            // Restore services section positioning if altered
+            servicesSection.style.position = previousSectionPosition || '';
         };
         
         closeBtn.addEventListener('click', closeModal);
@@ -453,6 +479,18 @@ class ServicesCarousel {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) newCloseModal();
         });
+    }
+
+    // New method to show service details by title
+    showServicePopupByTitle(title) {
+        const normalizedTitle = (title || '').toString().trim().toLowerCase();
+        const details = Array.isArray(this.serviceDetails) ? this.serviceDetails : [];
+        const service = details.find(s => (s.title || '').toString().trim().toLowerCase() === normalizedTitle);
+        if (service) {
+            this.showServiceDetails(service);
+        } else {
+            console.error(`Service with title "${title}" not found.`);
+        }
     }
 
     formatServiceContentResponsive(details, fontSize, lineHeight) {
@@ -549,5 +587,5 @@ class ServicesCarousel {
 
 // Initialize carousel when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new ServicesCarousel();
+    window.servicesCarousel = new ServicesCarousel();
 });     
