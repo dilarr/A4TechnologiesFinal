@@ -413,9 +413,10 @@ class ServicesCarousel {
             servicesSection.style.position = previousSectionPosition || '';
         };
         
-        // Close instantly on first press/tap
+        // Close instantly on first press/tap (single-use)
         closeBtn.addEventListener('pointerdown', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             closeModal();
         }, { once: true });
         
@@ -468,17 +469,14 @@ class ServicesCarousel {
         window.addEventListener('orientationchange', handleOrientationChange);
         window.addEventListener('resize', handleOrientationChange);
         
-        // Clean up event listeners when modal closes
-        const originalClose = closeModal;
+        // Clean up orientation listeners when modal closes via overlay or escape
         const newCloseModal = () => {
             window.removeEventListener('orientationchange', handleOrientationChange);
             window.removeEventListener('resize', handleOrientationChange);
-            originalClose();
+            closeModal();
         };
-        
-        closeBtn.removeEventListener('click', closeModal);
-        closeBtn.addEventListener('click', newCloseModal);
-        
+
+        // Ensure overlay click uses the same close routine
         modal.removeEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
             if (e.target === modal) newCloseModal();
