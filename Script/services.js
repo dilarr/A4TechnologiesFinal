@@ -9,6 +9,7 @@ class ServicesCarousel {
         this.currentIndex = 0;
         this.isMobile = window.innerWidth <= 768;
         this.isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+        this.isModalOpen = false; // Track if a modal is currently open
         
         // Responsive breakpoints:
         // Mobile: <= 768px - shows 1 card per slide (9 total slides)
@@ -189,6 +190,14 @@ class ServicesCarousel {
     }
 
     bindReadMoreButtons() {
+        // Remove existing event listeners to prevent duplicates
+        const existingBtns = document.querySelectorAll('#services .read-more-btn');
+        existingBtns.forEach(btn => {
+            // Clone the button to remove all event listeners
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+        
         // Re-bind read more buttons after restructuring
         const readMoreBtns = document.querySelectorAll('#services .read-more-btn');
         const serviceDetails = [
@@ -296,6 +305,14 @@ class ServicesCarousel {
     }
 
     showServiceDetails(service) {
+        // Prevent multiple modals from being opened
+        if (this.isModalOpen) {
+            console.log('Modal already open, ignoring request');
+            return;
+        }
+        
+        this.isModalOpen = true;
+        
         // Create modal overlay within Services section to prevent page scroll/jump
         const servicesSection = document.getElementById('services');
         const modal = document.createElement('div');
@@ -370,8 +387,8 @@ class ServicesCarousel {
         modalContent.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: ${isMobileModal ? '1rem' : '1.5rem'}; gap: ${isMobileModal ? '0.75rem' : '1rem'};">
                 <h3 style="color: var(--text-primary); font-size: ${titleSize}; font-weight: 600; margin: 0; line-height: 1.3; flex: 1; word-wrap: break-word;">${service.title}</h3>
-                <button id="closeModal" style="
-                    background: none;
+                <button id="closeModal" class="modal-close" style="
+                    background: rgba(255, 255, 255, 0.1);
                     border: none;
                     color: var(--text-secondary);
                     font-size: ${isMobileModal ? '1.25rem' : '1.5rem'};
@@ -386,7 +403,14 @@ class ServicesCarousel {
                     transition: all 0.3s ease;
                     flex-shrink: 0;
                     -webkit-tap-highlight-color: transparent;
-                " ontouchstart="" onmouseover="this.style.background='var(--border-color)'; this.style.color='var(--text-primary)'" onmouseout="this.style.background='none'; this.style.color='var(--text-secondary)'">
+                    position: relative;
+                    z-index: 1001;
+                    pointer-events: auto;
+                    user-select: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                " title="Close modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -403,24 +427,49 @@ class ServicesCarousel {
         }
         servicesSection.appendChild(modal);
 
-        // Close modal events
+        // Close modal events - Simplified and reliable approach
         const closeBtn = modalContent.querySelector('#closeModal');
+        let isClosing = false; // Prevent multiple close attempts
+        
+        // Simple close function
         const closeModal = () => {
-            if (modal.parentElement) {
+            if (isClosing) return; // Prevent multiple close attempts
+            isClosing = true;
+            
+            if (modal && modal.parentElement) {
                 modal.parentElement.removeChild(modal);
             }
             // Restore services section positioning if altered
             servicesSection.style.position = previousSectionPosition || '';
+            
+            // Reset modal open flag
+            this.isModalOpen = false;
+            
+            // Clean up event listeners
+            document.removeEventListener('keydown', handleEscape);
+            window.removeEventListener('orientationchange', handleOrientationChange);
+            window.removeEventListener('resize', handleOrientationChange);
         };
         
-        // Close instantly on first press/tap (single-use)
-        closeBtn.addEventListener('pointerdown', (e) => {
+        // Use a single, reliable click handler
+        closeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             closeModal();
-        }, { once: true });
+            return false;
+        }, { once: true }); // Use once: true to prevent multiple listeners
         
-        // Enhanced touch handling for mobile
+        // Add visual feedback
+        closeBtn.addEventListener('mousedown', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.3)';
+        });
+        
+        closeBtn.addEventListener('mouseup', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+        
+        // Enhanced touch handling for modal overlay
         let startY = 0;
         modal.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -428,7 +477,7 @@ class ServicesCarousel {
         
         modal.addEventListener('touchend', (e) => {
             // Only close if touch started and ended on the modal overlay (not content)
-            if (e.target === modal) {
+            if (e.target === modal && !isClosing) {
                 const endY = e.changedTouches[0].clientY;
                 const diffY = Math.abs(startY - endY);
                 // Only close if not much vertical movement (not scrolling)
@@ -438,27 +487,30 @@ class ServicesCarousel {
             }
         }, { passive: true });
         
+        // Modal overlay click handler - prevent conflicts with close button
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
+            if (e.target === modal && !isClosing) {
+                closeModal();
+            }
         });
 
         // Close with Escape key
         const handleEscape = (e) => {
-            if (e.key === 'Escape') {
+            if (e.key === 'Escape' && !isClosing) {
                 closeModal();
-                document.removeEventListener('keydown', handleEscape);
             }
         };
         document.addEventListener('keydown', handleEscape);
         
         // Handle orientation changes on mobile
         const handleOrientationChange = () => {
+            if (isClosing) return; // Don't handle orientation changes if already closing
             // Small delay to let the browser adjust
             setTimeout(() => {
                 const newIsMobile = window.innerWidth <= 480;
                 const newIsSmallTablet = window.innerWidth > 480 && window.innerWidth <= 768;
                 
-                if (newIsMobile !== isMobileModal) {
+                if (newIsMobile !== isMobileModal && !isClosing) {
                     // Recreate modal with new sizing if device orientation changed significantly
                     closeModal();
                     this.showServiceDetails(service);
@@ -468,23 +520,16 @@ class ServicesCarousel {
         
         window.addEventListener('orientationchange', handleOrientationChange);
         window.addEventListener('resize', handleOrientationChange);
-        
-        // Clean up orientation listeners when modal closes via overlay or escape
-        const newCloseModal = () => {
-            window.removeEventListener('orientationchange', handleOrientationChange);
-            window.removeEventListener('resize', handleOrientationChange);
-            closeModal();
-        };
-
-        // Ensure overlay click uses the same close routine
-        modal.removeEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) newCloseModal();
-        });
     }
 
     // New method to show service details by title
     showServicePopupByTitle(title) {
+        // Prevent multiple modals from being opened
+        if (this.isModalOpen) {
+            console.log('Modal already open, ignoring request');
+            return;
+        }
+        
         const normalizedTitle = (title || '').toString().trim().toLowerCase();
         const details = Array.isArray(this.serviceDetails) ? this.serviceDetails : [];
         const service = details.find(s => (s.title || '').toString().trim().toLowerCase() === normalizedTitle);
