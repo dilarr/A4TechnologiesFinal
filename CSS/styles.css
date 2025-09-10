@@ -1,3 +1,25 @@
+/* Footer: two Services lists on desktop, one on mobile */
+.footer-services-2 { display: none; }
+
+@media (min-width: 1025px) {
+	.footer-services-2 { display: block; }
+}
+
+/* Hide the mobile-only duplicates on desktop; show on mobile/tablet */
+.footer-mobile-only { display: list-item; }
+
+@media (min-width: 1025px) {
+	.footer-mobile-only { display: none; }
+}
+
+/* Desktop: hide "Services 2" title and balance list alignment */
+@media (min-width: 1025px) {
+	.footer-services-2 h4 { display: none; }
+	/* Reserve space equal to the hidden heading so lists align */
+	.footer-services-2::before { content: ""; display: block; height: calc(1.1rem + var(--spacing-md) + 8px); }
+	.footer-services-2 ul { margin-top: 0; }
+}
+
 /* CSS Reset and Base Styles */
         * {
           margin: 0;
@@ -77,6 +99,14 @@
         html {
           scroll-behavior: smooth;
           font-size: 16px;
+        }
+
+        #services,
+        #about,
+        #technologies,
+        #projects,
+        #contact {
+          scroll-margin-top: 100px; /* Adjust this value if your fixed header height is different */
         }
 
         body {
@@ -355,15 +385,15 @@
 }
 
 .nav-container {
-  width: 100%; /* Set width to 100% to fill available space */
+  width: 100%; 
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 50px; /* Increased space between logo and nav items */
-  padding-left: var(--spacing-lg); /* Retain left padding */
-  padding-right: 0; /* Push right elements to the edge */
-  height: 50px; /* Reduced height for the navbar */
+  gap: 50px; 
+  padding-left: var(--spacing-lg); 
+  padding-right: 0; 
+  height: 50px; 
 }
 
 @media (max-width: 768px) {
@@ -375,7 +405,7 @@
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 5px; /* Reduce space between logo and company name */
+  gap: 5px; 
 }
 
 .navbar-right-items {
@@ -386,7 +416,7 @@
 }
 
        .nav-logo {
-  height: 70px; /* Further increased logo height */
+  height: 70px; 
   width: auto;
   object-fit: contain;
   transition: all var(--transition-fast);
@@ -445,7 +475,7 @@
 
         /* Mobile Menu */
         .mobile-menu {
-          display: none; /* Hide mobile menu by default on desktop */
+          display: none; 
           flex-direction: column;
           cursor: pointer;
           z-index: 1001;
@@ -453,11 +483,11 @@
           padding: var(--spacing-xs);
           min-width: 30px;
           min-height: 30px;
-          margin-left: auto; /* Push mobile menu to the right when visible */
+          margin-left: auto; 
         }
         @media (max-width: 768px) {
           .mobile-menu {
-            display: flex !important; /* Show mobile menu on mobile, force with !important */
+            display: flex !important; 
           }
         }
 
@@ -486,10 +516,10 @@
         /* Enhanced Mobile Navigation Overlay */
         .mobile-nav-overlay {
           position: fixed;
-  top: 85px; /* Adjusted to match new navbar height */
+  top: 85px; 
           right: -100%;
           width: 100%;
-  height: calc(100vh - 85px); /* Adjusted to match new navbar height */
+  height: calc(100vh - 85px);
           background: rgba(3, 24, 46, 0.98);
           backdrop-filter: blur(20px);
           z-index: 999;
@@ -691,7 +721,7 @@
           align-items: center;
           justify-content: center;
           gap: var(--spacing-xs);
-          padding: var(--spacing-sm) var(--spacing-lg); /* Adjusted padding for more balanced look */
+          padding: var(--spacing-sm) var(--spacing-lg);
           border-radius: var(--radius-lg);
           text-decoration: none;
           font-weight: 600;
@@ -701,8 +731,8 @@
           border: 2px solid transparent;
           position: relative;
           overflow: hidden;
-          min-width: unset; /* Remove fixed min-width to allow natural sizing */
-          width: fit-content; /* Allow button to fit its content */
+          min-width: unset; 
+          width: fit-content; 
           text-transform: uppercase;
           cursor: pointer;
         }
@@ -873,44 +903,44 @@
   flex: 0 0 auto;
   opacity: 0.9;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 150px; /* Make it square */
-  height: 150px; /* Make it square */
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border-radius: 50%; /* Make it circular */
+  border-radius: 50%;
   padding: 10px;
-  overflow: hidden; /* Hide overflow outside the circle */
+  overflow: hidden;
   box-shadow: var(--shadow-md);
-  background-color: white; /* Default white background for all client items */
+  background-color: white; 
 }
 
 .client-item:first-child {
-    background-color: white; /* Default white background for all client items */
+    background-color: white;
 }
 
 .client-item:first-child:hover {
-    background-color: black; /* Keep first item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black; 
+    box-shadow: none; /
 }
 .client-item:nth-child(1) {
-    background-color: black; /* Black background for the first duplicated client item */
+    background-color: black; 
 }
 .client-item:nth-child(9) {
-    background-color: black; /* Black background for the first duplicated client item */
+    background-color: black; 
 }
 
 .client-item:nth-child(9):hover {
-    background-color: black; /* Keep ninth item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black; 
+    box-shadow: none; 
 }
 .client-item:nth-child(1):hover {
-    background-color: black; /* Keep ninth item black on hover */
-    background: black; /* Ensure no gradient is applied */
-    box-shadow: none; /* Remove box-shadow on hover for this specific item */
+    background-color: black; 
+    background: black;
+    box-shadow: none; 
 }
 
 .client-item:hover {
@@ -977,9 +1007,6 @@
     height: 140px; /* Make it square */
   }
 
-  .client-item img {
-    /* Removed height and max-width as it should fill the parent with object-fit: cover */
-  }
 }
 
 @media (max-width: 480px) {
@@ -997,9 +1024,7 @@
     height: 120px; /* Make it square */
   }
 
-  .client-item img {
-    /* Removed height and max-width */
-  }
+  
 }
 
 /* Mobile Responsiveness */
@@ -1707,11 +1732,11 @@
 /* Mobile styles - show 1 card at a time */
 @media (max-width: 768px) {
   .services-grid {
-    width: 900%; /* 9 cards * 100% width each */
+    width: calc(100% * 9); /* precise width for 9 cards */
   }
 
   .slide-group {
-    width: 11.111%; /* 100% / 9 cards = 11.111% per card */
+    width: calc(100% / 9); /* precise width per card */
     gap: 0;
   }
 
@@ -1777,6 +1802,20 @@
   .dot {
     width: 10px;
     height: 10px;
+  }
+
+  /* Add side padding so active card has space on both sides;
+     keep overflow hidden so neighbors are not visible */
+  .services-container {
+    padding: 0 var(--spacing-md);
+    box-sizing: border-box;
+  }
+
+  /* Ensure slides/cards don't add extra horizontal gaps */
+  .services-grid,
+  .slide-group,
+  .service-card {
+    margin: 0;
   }
 }
 
@@ -1874,6 +1913,7 @@
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: var(--spacing-md);
+  text-align: center;
 }
 
 .overview-text p {
@@ -1881,9 +1921,9 @@
   font-size: 1.1rem;
   /* line-height: 1.8; */
   margin-bottom: var(--spacing-md);
-  text-align: justify;
-  text-justify: inter-word;
-  word-spacing: -0.25em;
+  text-align: center;
+  text-justify: auto;
+  word-spacing: normal;
   /* word-spacing: normal; */
 }
 
@@ -2327,6 +2367,12 @@
         
         /* Mobile responsive card sizing */
         @media (max-width: 768px) {
+
+          .projects-grid.mobile-carousel .project-card {
+            flex: 0 0 calc(100% - 50px); /* Show one card with side padding */
+            margin: 0 20px; /* Adjust margin for spacing */
+          }
+
             .projects-grid.mobile-carousel .project-card {
                 flex: 0 0 calc(100% - 40px); /* Show one card with side padding */
                 margin: 0 20px; /* Adjust margin for spacing */
@@ -2340,6 +2386,7 @@
                 margin: 0 10px;
                 min-height: 380px;
             }
+
         }
 
         .project-card:hover {
@@ -2442,6 +2489,7 @@
             height: 100%;
             object-fit: contain;
             border-radius: 50%;
+            
         }
 
         .project-info-container h3 {
@@ -2456,6 +2504,10 @@
             color: var(--color-text-dark);
             line-height: 1.6;
             flex-grow: 1;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            word-spacing: -1  px;
         }
 
         .project-info-container .read-more-btn {
@@ -2643,6 +2695,13 @@
             object-fit: contain;
         }
 
+        /* Mobile: nudge the client logo downward in project popups */
+        @media (max-width: 768px) {
+            .client-logo {
+                margin-top: var(--spacing-sm);
+            }
+        }
+
         .modal-titles {
             flex: 1;
         }
@@ -2690,6 +2749,9 @@
         .modal-section-content {
             line-height: 1.8;
             color: #cbd5e1;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
         }
 
         .approach-list {
@@ -3013,6 +3075,21 @@
             width: 300%; /* 3 small cards × 100% */
         }
 
+        /* Mobile adjustments: prevent previous/next cards from peeking */
+        @media (max-width: 768px) {
+            .testimonials-carousel-container {
+                padding-right: 0; /* avoid inner space that reveals adjacent cards */
+                margin: 0;       /* keep container flush with viewport */
+            }
+            .testimonials-carousel-track {
+                padding-right: 0; /* ensure track fills container exactly */
+            }
+            .testimonials-carousel-track .testimonial-card,
+            .testimonials-carousel-track .testimonial-card-small {
+                margin: 0; /* remove horizontal margins that cause peeking */
+            }
+        }
+
         .testimonial-card {
             background: var(--bg-primary);
             border-radius: var(--radius-2xl);
@@ -3101,6 +3178,7 @@
             border-left: 4px solid var(--primary-color);
             text-align: justify;
             text-justify: inter-word;
+            hyphens: auto;
             flex-grow: 1;
         }
 
@@ -3178,13 +3256,14 @@
             box-shadow: var(--shadow-lg);
             transition: all var(--transition-normal);
             border: 1px solid var(--border-color);
-            text-align: center;
+            text-align: inherit;
             position: relative;
             overflow: hidden;
             margin: 0 var(--spacing-xs);
             display: flex;
             flex-direction: column;
             align-items: center;
+            word-spacing: -0.25em;
         }
 
         .testimonial-card-small::before {
@@ -4117,9 +4196,15 @@
 .footer {
   background: var(--bg-primary);
   color: var(--text-white);
-  padding: var(--spacing-2xl) 0 var(--spacing-lg);
+  padding: var(--spacing-lg) 0 var(--spacing-sm);
   position: relative;
   border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Align footer container to the left on wide screens */
+.footer .container {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .footer::before {
@@ -4139,9 +4224,27 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-xl);
+  grid-template-columns: 1.2fr 1fr 1fr 1fr; /* Bring Company up into first row */
+  column-gap: var(--spacing-2xl);
+  row-gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  max-width: 1200px; /* Adjust as needed */
+  margin-left: 0; /* Align grid to the left */
+  margin-right: auto;
+  justify-content: start;
+}
+
+/* Align Company section (4th column) to the right and add visual balance */
+.footer-content .footer-section:last-child {
+  justify-self: start;
+  text-align: left;
+}
+
+/* Slightly lower the second Services column for perfect alignment on desktop */
+@media (min-width: 769px) {
+  .footer-content .footer-section:nth-child(3) {
+    margin-top: 8px;
+  }
 }
 
 .footer-section {
@@ -4157,8 +4260,8 @@
 }
 
 .footer-logo-img {
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   object-fit: contain;
   border-radius: 8px;
   /* background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); */
@@ -4215,21 +4318,22 @@
 
 .footer-section ul {
   list-style: none;
-  text-align: left;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-section ul li {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 10px;
 }
 
 .footer-section ul li a {
   color: #cbd5e1;
   text-decoration: none;
-  transition: all var(--transition-fast);
-  font-size: 0.9rem;
-  display: block;
-  padding: 4px 0;
-  border-radius: 4px;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .footer-section ul li a:hover {
@@ -4240,9 +4344,9 @@
 
 .social-links {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
-  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: calc(var(--spacing-sm) + 6px); /* Lower icons slightly */
+  flex-wrap: nowrap; /* Keep on one line */
 }
 
 .social-links a {
@@ -4271,15 +4375,19 @@
 .footer-copyright {
   text-align: center;
   padding-top: var(--spacing-lg);
-  border-top: 1px solid #334155;
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+/* Center copyright relative to the page (not the left-aligned container) */
+@media (min-width: 1024px) {
+  .footer-copyright {
+    transform: translateX(calc((100vw - 100%) / 2));
+  }
 }
 
 .footer-copyright p {
+  font-size: 0.85rem;
   color: #94a3b8;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  text-align: center;
-  margin: 0;
 }
 
 .footer-copyright span b {
@@ -4289,8 +4397,9 @@
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
   .footer-content {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
     gap: var(--spacing-lg);
+    max-width: 900px; /* Adjust as needed for tablet */
   }
 
   .container {
@@ -4308,8 +4417,11 @@
   }
 
   .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
+    grid-template-columns: 1fr; /* Stack vertically on small screens */
+    text-align: center; /* Center all footer content on mobile */
+    gap: var(--spacing-md);
+    max-width: 100%;
+    justify-items: center; /* Center grid items */
   }
 
   .footer-section:first-child {
@@ -4323,7 +4435,7 @@
   }
 
   .logo-container {
-    justify-content: center;
+    justify-content: center; /* Center logo + title */
   }
 
   .footer-logo-img {
@@ -4341,11 +4453,11 @@
   }
 
   .social-links {
-    justify-content: center;
+    justify-content: center; /* Center social icons */
   }
 
   .footer-section h4 {
-    text-align: center;
+    text-align: center; /* Center section titles */
     font-size: 1.05rem;
   }
   
@@ -4356,6 +4468,20 @@
   .footer-section h4::after {
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  /* Center Services links and Company section on mobile */
+  .footer-content .footer-section:last-child {
+    justify-self: center;
+    text-align: center;
+  }
+
+  .footer-section ul {
+    text-align: center;
+  }
+
+  .footer-section ul li a {
+    display: inline-flex;
   }
 }
 
@@ -4706,6 +4832,9 @@
 
   .testimonial-text {
     font-size: 1.1rem;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
   }
 
   .testimonial-card-small .testimonial-text {

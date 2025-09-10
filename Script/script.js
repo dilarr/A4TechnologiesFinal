@@ -245,25 +245,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle general site loader (if any - ensure it doesn't conflict with form loader)
     const siteLoader = document.getElementById('loading'); // This is for the *site* loader
     if (siteLoader) {
+        // Show loader only during initial page load
         if (document.readyState === 'loading') {
             siteLoader.classList.add('show');
         } else {
             siteLoader.classList.remove('show');
             siteLoader.style.display = 'none';
         }
+
+        // Hide loader when page is fully loaded
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                siteLoader.classList.remove('show');
+                setTimeout(() => {
+                    siteLoader.style.display = 'none';
+                }, 500); // Match this duration with your CSS transition duration
+            }, 1000); // Delay before starting fade out
+        });
+
+        // Fallback: ensure loader is hidden after maximum time
+        setTimeout(() => {
+            if (siteLoader.classList.contains('show')) {
+                siteLoader.classList.remove('show');
+                setTimeout(() => {
+                    siteLoader.style.display = 'none';
+                }, 500); // Match this duration with your CSS transition duration
+            }
+        }, 5000); // Hide after 5 seconds as a fallback
     }
 
-    // This part should handle the visibility of the general site loader
-    window.addEventListener('load', () => {
-        if (siteLoader) {
-            siteLoader.classList.remove('show');
-            // Use a timeout to ensure the fade-out transition completes
-            setTimeout(() => {
-                siteLoader.style.display = 'none';
-            }, 500); // Match this duration with your CSS transition duration
-        }
-    });
-    
     // ===== NOTIFICATION SYSTEM =====
     
     function showNotification(message, type = 'info') {
