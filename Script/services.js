@@ -413,7 +413,11 @@ class ServicesCarousel {
             servicesSection.style.position = previousSectionPosition || '';
         };
         
-        closeBtn.addEventListener('click', closeModal);
+        // Close instantly on first press/tap
+        closeBtn.addEventListener('pointerdown', (e) => {
+            e.preventDefault();
+            closeModal();
+        }, { once: true });
         
         // Enhanced touch handling for mobile
         let startY = 0;

@@ -378,11 +378,13 @@
         viewButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                const caseId = this.getAttribute('data-case');
                 const projectCard = this.closest('.project-card');
-                const logoImg = projectCard.querySelector('.project-client-logo img');
+                // Prefer explicit data-case on the button; fallback to the card's data-case
+                let caseId = this.getAttribute('data-case') || (projectCard && projectCard.getAttribute('data-case'));
+                if (!caseId) return; // no case id found
+                const logoImg = projectCard ? projectCard.querySelector('.project-client-logo img') : null;
                 const logoSrc = logoImg ? logoImg.src : '';
-                openModal(parseInt(caseId), logoSrc); // Convert caseId to an integer
+                openModal(parseInt(caseId, 10), logoSrc);
             });
         });
 

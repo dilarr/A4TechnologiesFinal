@@ -1913,6 +1913,7 @@
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: var(--spacing-md);
+  text-align: center;
 }
 
 .overview-text p {
@@ -1920,9 +1921,9 @@
   font-size: 1.1rem;
   /* line-height: 1.8; */
   margin-bottom: var(--spacing-md);
-  text-align: justify;
-  text-justify: inter-word;
-  word-spacing: -0.25em;
+  text-align: center;
+  text-justify: auto;
+  word-spacing: normal;
   /* word-spacing: normal; */
 }
 
@@ -2488,6 +2489,7 @@
             height: 100%;
             object-fit: contain;
             border-radius: 50%;
+            
         }
 
         .project-info-container h3 {
