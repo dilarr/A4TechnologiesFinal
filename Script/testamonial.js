@@ -1,135 +1,183 @@
-  (function() {
-            // Main Testimonials Carousel
-            let currentMainSlide = 0;
-            const totalMainSlides = 2;
-            const mainTestimonialsTrack = document.getElementById('mainTestimonialsTrack');
-            const mainPrevBtn = document.getElementById('mainTestimonialsPrevBtn');
-            const mainNextBtn = document.getElementById('mainTestimonialsNextBtn');
-
-            // Extended Testimonials Carousel
-            let currentExtendedSlide = 0;
-            const totalExtendedSlides = 3;
-            const extendedTestimonialsTrack = document.getElementById('extendedTestimonialsTrack');
-            const extendedPrevBtn = document.getElementById('extendedTestimonialsPrevBtn');
-            const extendedNextBtn = document.getElementById('extendedTestimonialsNextBtn');
-
-            function updateMainTestimonialsCarousel() {
-                if (!mainTestimonialsTrack) return;
-                
-                const translateX = -currentMainSlide * (100 / totalMainSlides);
-                mainTestimonialsTrack.style.transform = `translateX(${translateX}%)`;
-                
-                // Update button states
-                if (mainPrevBtn) mainPrevBtn.disabled = currentMainSlide === 0;
-                if (mainNextBtn) mainNextBtn.disabled = currentMainSlide === totalMainSlides - 1;
+(function() {
+    class TestimonialsCarousel {
+        constructor() {
+            this.track = document.getElementById('testimonialsTrack');
+            this.prevBtn = document.getElementById('testimonialsPrevBtn');
+            this.nextBtn = document.getElementById('testimonialsNextBtn');
+            this.dotsContainer = document.getElementById('testimonialsDots');
+            this.cards = this.track ? this.track.querySelectorAll('.testimonial-card') : [];
+            this.currentIndex = 0;
+            this.isMobile = window.innerWidth <= 768;
+            this.totalCards = this.cards.length;
+            
+            // Calculate total slides based on screen size
+            this.totalSlides = this.getTotalSlides();
+            
+            this.init();
+            this.bindEvents();
+            this.handleResize();
+        }
+        
+        getTotalSlides() {
+            return this.totalCards; // 1 card per slide on both desktop and mobile
+        }
+        
+        init() {
+            this.createDots();
+            this.updateCarousel();
+            this.updateButtonStates();
+        }
+        
+        createDots() {
+            if (!this.dotsContainer) return;
+            
+            this.dotsContainer.innerHTML = '';
+            for (let i = 0; i < this.totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'testimonials-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => this.goToSlide(i));
+                this.dotsContainer.appendChild(dot);
             }
-
-            function updateExtendedTestimonialsCarousel() {
-                if (!extendedTestimonialsTrack) return;
-                
-                const translateX = -currentExtendedSlide * (100 / totalExtendedSlides);
-                extendedTestimonialsTrack.style.transform = `translateX(${translateX}%)`;
-                
-                // Update button states
-                if (extendedPrevBtn) extendedPrevBtn.disabled = currentExtendedSlide === 0;
-                if (extendedNextBtn) extendedNextBtn.disabled = currentExtendedSlide === totalExtendedSlides - 1;
+        }
+        
+        updateCarousel() {
+            if (!this.track) return;
+            
+            // Both desktop and mobile: move one card width per step
+            const translateX = -(this.currentIndex * 20); // 20% per card (100% / 5 cards)
+            
+            this.track.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            if (this.dotsContainer) {
+                const dots = this.dotsContainer.querySelectorAll('.testimonials-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
             }
-
-            function nextMainSlide() {
-                if (currentMainSlide < totalMainSlides - 1) {
-                    currentMainSlide++;
-                    updateMainTestimonialsCarousel();
+        }
+        
+        updateButtonStates() {
+            if (this.prevBtn) {
+                this.prevBtn.disabled = this.currentIndex === 0;
+                this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.5' : '1';
+            }
+            if (this.nextBtn) {
+                this.nextBtn.disabled = this.currentIndex >= this.totalSlides - 1;
+                this.nextBtn.style.opacity = this.currentIndex >= this.totalSlides - 1 ? '0.5' : '1';
+            }
+        }
+        
+        goToSlide(index) {
+            this.currentIndex = Math.max(0, Math.min(index, this.totalSlides - 1));
+            this.updateCarousel();
+            this.updateButtonStates();
+        }
+        
+        nextSlide() {
+            if (this.currentIndex < this.totalSlides - 1) {
+                this.currentIndex++;
+                this.updateCarousel();
+                this.updateButtonStates();
+            }
+        }
+        
+        prevSlide() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+                this.updateCarousel();
+                this.updateButtonStates();
+            }
+        }
+        
+        handleResize() {
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                // Debounce resize events for better performance
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    const wasMobile = this.isMobile;
+                    this.isMobile = window.innerWidth <= 768;
+                    
+                    // Update carousel if needed (for future enhancements)
+                    if (wasMobile !== this.isMobile) {
+                        this.updateCarousel();
+                        this.updateButtonStates();
+                    }
+                }, 150);
+            });
+        }
+        
+        bindEvents() {
+            // Button events
+            if (this.nextBtn) {
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+            }
+            if (this.prevBtn) {
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+            }
+            
+            // Arrow key navigation
+            document.addEventListener('keydown', (e) => {
+                // Only handle arrow keys when testimonials section is in view
+                const testimonialsSection = document.getElementById('testimonials');
+                if (testimonialsSection && this.isElementInViewport(testimonialsSection)) {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    }
                 }
-            }
-
-            function prevMainSlide() {
-                if (currentMainSlide > 0) {
-                    currentMainSlide--;
-                    updateMainTestimonialsCarousel();
-                }
-            }
-
-            function nextExtendedSlide() {
-                if (currentExtendedSlide < totalExtendedSlides - 1) {
-                    currentExtendedSlide++;
-                    updateExtendedTestimonialsCarousel();
-                }
-            }
-
-            function prevExtendedSlide() {
-                if (currentExtendedSlide > 0) {
-                    currentExtendedSlide--;
-                    updateExtendedTestimonialsCarousel();
-                }
-            }
-
-            // Event listeners for main testimonials
-            if (mainNextBtn) mainNextBtn.addEventListener('click', nextMainSlide);
-            if (mainPrevBtn) mainPrevBtn.addEventListener('click', prevMainSlide);
-
-            // Event listeners for extended testimonials
-            if (extendedNextBtn) extendedNextBtn.addEventListener('click', nextExtendedSlide);
-            if (extendedPrevBtn) extendedPrevBtn.addEventListener('click', prevExtendedSlide);
-
-            // Touch/swipe support for main testimonials
-            let startX = 0;
-            let endX = 0;
-
-            if (mainTestimonialsTrack) {
-                mainTestimonialsTrack.addEventListener('touchstart', (e) => {
+            });
+            
+            // Touch/swipe support
+            if (this.track) {
+                let startX = 0;
+                let endX = 0;
+                
+                this.track.addEventListener('touchstart', (e) => {
                     startX = e.touches[0].clientX;
-                });
-
-                mainTestimonialsTrack.addEventListener('touchmove', (e) => {
+                }, { passive: true });
+                
+                this.track.addEventListener('touchmove', (e) => {
                     endX = e.touches[0].clientX;
-                });
-
-                mainTestimonialsTrack.addEventListener('touchend', () => {
+                }, { passive: true });
+                
+                this.track.addEventListener('touchend', () => {
                     const threshold = 50;
                     const distance = startX - endX;
-
+                    
                     if (Math.abs(distance) > threshold) {
                         if (distance > 0) {
-                            nextMainSlide();
+                            this.nextSlide();
                         } else {
-                            prevMainSlide();
+                            this.prevSlide();
                         }
                     }
-                });
+                }, { passive: true });
             }
-
-            // Touch/swipe support for extended testimonials
-            if (extendedTestimonialsTrack) {
-                extendedTestimonialsTrack.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                });
-
-                extendedTestimonialsTrack.addEventListener('touchmove', (e) => {
-                    endX = e.touches[0].clientX;
-                });
-
-                extendedTestimonialsTrack.addEventListener('touchend', () => {
-                    const threshold = 50;
-                    const distance = startX - endX;
-
-                    if (Math.abs(distance) > threshold) {
-                        if (distance > 0) {
-                            nextExtendedSlide();
-                        } else {
-                            prevExtendedSlide();
-                        }
-                    }
-                });
-            }
-
-            // Initialize carousels
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => {
-                    updateMainTestimonialsCarousel();
-                    updateExtendedTestimonialsCarousel();
-                });
-            } else {
-                updateMainTestimonialsCarousel();
-                updateExtendedTestimonialsCarousel();
-            }
-        })();
+        }
+        
+        isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+    }
+    
+    // Initialize carousel when DOM is loaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.testimonialsCarousel = new TestimonialsCarousel();
+        });
+    } else {
+        window.testimonialsCarousel = new TestimonialsCarousel();
+    }
+})();
