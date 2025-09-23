@@ -1,15 +1,19 @@
-
     document.addEventListener('DOMContentLoaded', function() {
         // Enhanced Mobile Carousel Functionality
         const track = document.getElementById('projectsCarouselTrack');
         const prevBtn = document.getElementById('projectsPrevBtn');
         const nextBtn = document.getElementById('projectsNextBtn');
         
-        if (!track || !prevBtn || !nextBtn) return;
-
+        // Get desktop grid container and cards
+        const desktopGrid = document.querySelector('.projects-grid.desktop-grid');
+        const projectCards = document.querySelectorAll('.project-card');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        // Variables for keyboard navigation
         let currentIndex = 0;
         let isAnimating = false;
         let autoPlayInterval;
+        let isAllFilterActive = true; // Track if "All" filter is active
 
         // Function to get currently visible project cards in mobile carousel
         function getVisibleCards() {
@@ -55,22 +59,47 @@
             nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
         }
 
+        // Function to update desktop grid navigation (highlight current card)
+        function updateDesktopGridNavigation() {
+            if (!isAllFilterActive) return;
+            
+            // Remove highlight from all cards
+            projectCards.forEach(card => {
+                card.classList.remove('keyboard-highlight');
+            });
+            
+            // Add highlight to current card
+            if (projectCards[currentIndex]) {
+                projectCards[currentIndex].classList.add('keyboard-highlight');
+                // Removed scrollIntoView to prevent auto-scrolling to projects section
+            }
+        }
+
         // Next button click handler
         nextBtn.addEventListener('click', function() {
             if (isAnimating) return;
             
-            const visibleCards = getVisibleCards();
-            const cardsPerView = getCardsPerView();
-            const maxIndex = Math.max(0, visibleCards.length - cardsPerView);
-            
-            if (currentIndex < maxIndex) {
-                isAnimating = true;
-                currentIndex++;
-                updateCarousel();
+            // If mobile view is active, use carousel navigation
+            if (window.getComputedStyle(document.querySelector('.mobile-carousel')).display !== 'none') {
+                const visibleCards = getVisibleCards();
+                const cardsPerView = getCardsPerView();
+                const maxIndex = Math.max(0, visibleCards.length - cardsPerView);
                 
-                setTimeout(() => {
-                    isAnimating = false;
-                }, 400);
+                if (currentIndex < maxIndex) {
+                    isAnimating = true;
+                    currentIndex++;
+                    updateCarousel();
+                    
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 400);
+                }
+            } else if (isAllFilterActive) {
+                // If desktop view and "All" filter is active, use grid navigation
+                if (currentIndex < projectCards.length - 1) {
+                    currentIndex++;
+                    updateDesktopGridNavigation();
+                }
             }
         });
 
@@ -78,14 +107,23 @@
         prevBtn.addEventListener('click', function() {
             if (isAnimating) return;
             
-            if (currentIndex > 0) {
-                isAnimating = true;
-                currentIndex--;
-                updateCarousel();
-                
-                setTimeout(() => {
-                    isAnimating = false;
-                }, 400);
+            // If mobile view is active, use carousel navigation
+            if (window.getComputedStyle(document.querySelector('.mobile-carousel')).display !== 'none') {
+                if (currentIndex > 0) {
+                    isAnimating = true;
+                    currentIndex--;
+                    updateCarousel();
+                    
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 400);
+                }
+            } else if (isAllFilterActive) {
+                // If desktop view and "All" filter is active, use grid navigation
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateDesktopGridNavigation();
+                }
             }
         });
 
@@ -186,20 +224,7 @@
         updateCarousel(false);
         startAutoPlay();
 
-        // Update on window resize
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                currentIndex = 0; // Reset index on resize
-                updateCarousel(false);
-            }, 250);
-        });
-
         // Enhanced Filter functionality
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // Remove active class from all buttons
@@ -209,6 +234,9 @@
                 this.classList.add('active');
 
                 const filterValue = this.getAttribute('data-filter');
+                
+                // Update isAllFilterActive flag
+                isAllFilterActive = filterValue === 'all';
 
                 // Filter projects with smooth animation
                 projectCards.forEach((card, index) => {
@@ -241,6 +269,10 @@
                         updateCarousel(false);
                         startAutoPlay(); // Restart auto-play after filtering
                     }, 100);
+                } else if (isAllFilterActive) {
+                    // Reset index for desktop grid when "All" filter is selected
+                    currentIndex = 0;
+                    updateDesktopGridNavigation();
                 }
             });
         });
@@ -255,7 +287,34 @@
         // Initial carousel update for "All" category
         setTimeout(() => {
             updateCarousel(false);
+            // updateDesktopGridNavigation(); // Initialize desktop grid navigation - commented out to prevent auto-scroll
         }, 100);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Only handle arrow keys when "All" filter is active
+            if (!isAllFilterActive) return;
+            
+            // Check if we're in desktop view
+            if (window.getComputedStyle(document.querySelector('.mobile-carousel')).display === 'none') {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateDesktopGridNavigation();
+                        }
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        if (currentIndex < projectCards.length - 1) {
+                            currentIndex++;
+                            updateDesktopGridNavigation();
+                        }
+                        break;
+                }
+            }
+        });
 
         // Modal functionality
         const modalOverlay = document.getElementById('caseStudyModal');

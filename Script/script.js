@@ -702,22 +702,25 @@ document.addEventListener('DOMContentLoaded', function() {
         'Build. Ship. Scale.',
         'Cloud-Native & AI-Ready',
         'Secure. Performant. Reliable.',
-        'Your Partner in Digital Growth'
+        'Your Partner in Digital Growth',
+        'Comprehensive IT Solutions'
     ];
     const subtitles = [
         'Engineering modern software that scales with your ambition.',
         'From idea to production with quality and speed.',
         'Future-proof platforms with automation and intelligence.',
         'Best practices, clean code, and measurable outcomes.',
-        'Let\'s turn your vision into a product users love.'
+        'Let\'s turn your vision into a product users love.',
+        'Explore our full range of professional services below.'
     ];
 
     function updateHeroText(index) {
         if (!heroTitleEl || !heroSubEl) return;
         heroTitleEl.classList.add('text-exit');
+        heroSubEl.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         heroSubEl.style.opacity = '0';
-        heroSubEl.style.filter = 'blur(6px)';
-        heroSubEl.style.transform = 'translateY(10px)';
+        heroSubEl.style.filter = 'blur(8px)';
+        heroSubEl.style.transform = 'translateY(20px) translateX(10px)';
 
         setTimeout(() => {
             heroTitleEl.textContent = titles[index % titles.length];
@@ -727,10 +730,9 @@ document.addEventListener('DOMContentLoaded', function() {
             heroTitleEl.classList.add('text-enter-active');
 
             heroSubEl.textContent = subtitles[index % subtitles.length];
-            heroSubEl.style.transition = 'all .6s ease';
             heroSubEl.style.opacity = '1';
             heroSubEl.style.filter = 'blur(0)';
-            heroSubEl.style.transform = 'translateY(0)';
+            heroSubEl.style.transform = 'translateY(0) translateX(0)';
 
             setTimeout(() => {
                 heroTitleEl.classList.remove('text-enter', 'text-enter-active');
@@ -759,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slides[0]?.classList.add('active');
     slides[1]?.classList.add('next');
     updateHeroText(0);
-    setInterval(showNextSlide, 6000);
+    setInterval(showNextSlide, 5000);
 
     window.addEventListener('resize', () => {
         const slideshowContainer = document.querySelector('.slideshow-container');

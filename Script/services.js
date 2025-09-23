@@ -198,61 +198,41 @@ class ServicesCarousel {
             btn.parentNode.replaceChild(newBtn, btn);
         });
         
+        // Map service titles to their corresponding page filenames
+        const servicePageMap = {
+            "Application Development": "ApplicationDevelopment.html",
+            "IT Support": "IT Support.html",
+            "AI and Automation": "AIandAutomation.html",
+            "Website and Social Media Marketing": "WebsiteandSocial Media.html", // Fixed this mapping
+            "Internet and Network Setup": "InternetandNetworkSetup.html",
+            "Desktop / Laptop Setup and Updating": "DesktopLaptopSetupandUpdating.html",
+            "IT Security and Security Audit": "ITSecurityandSecurityAudit.html",
+            "Email and Communication": "EmailandCommunication.html",
+            "Document Management": "DocumentManagement.html"
+        };
+
         // Re-bind read more buttons after restructuring
         const readMoreBtns = document.querySelectorAll('#services .read-more-btn');
-        const serviceDetails = [
-            {
-                title: "Application Development",
-                details: "• Are you still using multiple Excel sheets to manage your client information?\n\n• Do you spend hours every week combining reports from different sources?\n\n• Is your team entering the same data in more than one system?\n\n• Do you struggle to track project progress in real time?\n\n• Are important business updates still shared by email instead of a central platform?\n\n• Do you find it difficult to know which version of a document is the latest?\n\n• Are your customer details scattered across different files and tools?\n\n• Do you face delays because approvals or updates are manual?\n\n• Is it hard to get a clear picture of your sales or operations at a glance?\n\n• Is it hard to get a clear picture of your sales or operations at a glance?\n\nIf you answered yes to any of these questions, our expert development team can help you build the perfect solution. We specialize in creating custom applications using the latest technologies like React, Node.js, Python, and cloud platforms. Our development process includes thorough planning, agile development, comprehensive testing, and seamless deployment with ongoing support and maintenance."
-            },
-            {
-                title: "IT Support",
-                details: "• Do you often encounter problems with your computer or internet that you can't solve on your own?\n\n• Is your team losing precious time while waiting for technical issues to get fixed?\n\n• Are you concerned about what would happen if your computer suddenly crashed?\n\n• Are your important files and emails backed up and secure?\n\n• Do you have a plan ready in case your business experiences a cyber-attack?\n\n• Are your software updates and security fixes handled regularly?\n\n• Do you have a clear contact when there's a tech problem?\n\n• Is slow Wi-Fi or network outages making it hard for your team to work efficiently?\n\n• Are you confident that your business data is protected from hackers and viruses?\n\n• Do you find yourself spending more time fixing tech problems than actually running your business?\n\nIf any of these challenges sound familiar, our IT support team is here to help. We provide both remote and on-site support with guaranteed response times, proactive monitoring, and comprehensive solutions to keep your technology running smoothly and securely."
-            },
-            {
-                title: "AI and Automation",
-                details: "• Do you or your team spend hours every week doing the same repetitive tasks?\n\n• Are you still entering the same data into multiple systems manually?\n\n• Do you find it difficult to analyze large amounts of data to make decisions?\n\n• Are you missing opportunities because tasks take too long to complete?\n\n• Do you wish routine approvals, reminders, or follow-ups could happen automatically?\n\n• Would your team be more productive if they had more time for high-value work instead of admin tasks?\n\nIf you're ready to embrace the future of business technology, our AI and automation experts can help. We specialize in creating intelligent solutions that streamline repetitive tasks, provide valuable insights through machine learning, and help you make data-driven decisions that drive growth and efficiency."
-            },
-            {
-                title: "Website and Social Media Marketing",
-                details: "• Do your customers find it difficult to get the latest information about your business online?\n\n• Is your website outdated, slow, or hard to use on mobile phones?\n\n• Do you struggle to get new leads or sales through your website?\n\n• When people search for your business online, are you confident they can find you easily?\n\n• Do you want to reach more customers online? Are your competitors more visible on Google or social media than you?\n\n• Do you post on social media but see little engagement or results?\n\n• Is managing multiple social media accounts taking too much of your time?\n\n• Do you know if your website and social media are bringing you real business value?\n\n• Are you missing out on potential customers because you don't advertise online?\n\n• Do you wish you had a clear online strategy that works 24/7 to bring in clients?\n\nCome to us for help! We specialize in enhancing your social media marketing strategy and ensuring that the same posts are published on multiple platforms, including Facebook, Instagram, LinkedIn, and more. Additionally, we focus on optimizing your website for better visibility in Google Search."
-            },
-            {
-                title: "Internet and Network Setup",
-                details: "• Still relying on a small Telstra or Optus modem and struggling with weak Wi-Fi as you move around the office?\n\n• Do staff complain about constant internet dropouts, especially those working further away from the modem?\n\n• Have you noticed employees spending time on YouTube or Facebook during work hours, but not sure how to manage it?\n\n• Are some staff even playing online games on company devices when they should be working?\n\n• Is everyone in your office — including guests — using the same Wi-Fi password? (This makes it easy for hackers to get in!)\n\n• Would you like better visibility and control over internet usage in your workplace?\n\n• Is video conferencing often lagging or cutting out due to poor connectivity?\n\n• Do you have trouble managing multiple devices (computers, printers, phones) on your network?\n\n• Are your business systems at risk because your router or firewall is outdated?\n\n• Do you spend more time fixing internet issues than focusing on your business?\n\nIf any of these situations sound familiar and you need assistance, we have solutions for you. We are well-versed in trusted names in technology, such as Cisco and Ubiquiti, and can help meet your needs."
-            },
-            {
-                title: "Desktop / Laptop Setup and Updating",
-                details: "• Do you have multiple laptops and desktops but aren't sure if they're updated with the latest security and system patches?\n\n• When software needs an update, are you spending hours going from computer to computer to install it manually?\n\n• Do you know how many computers your business owns, how old they are, or when they should be replaced?\n\n• Do you buy new computers but struggle to set them up the right way?\n\n• Do you worry that your computer might be slow or unsafe because it's not updated?\n\n• Is installing software, email, and security tools on new devices taking too much of your time?\n\n• Do you have different staff using computers set up in different ways (no standard setup)?\n\n• Are important files and settings lost when you replace or upgrade computers?\n\n• Do you know if your devices are protected with antivirus and security tools?\n\n• Is your team frustrated by slow, unpatched, or outdated laptops?\n\n• Would it save you time if every new device was ready-to-use on day one with all apps and security configured?\n\nIf you want someone to manage your desktop computers and ensure that updates and security measures are properly implemented, we can help. We can set up your computers on a centralized management platform where you can oversee Windows updates, application installations, and much more!"
-            },
-            {
-                title: "IT Security and Security Audit",
-                details: "• Have you ever discovered that a former employee still had access to their old email account?\n\n• Are you getting annoying emails like 'You won a trip to Bali' or 'Register to win a million dollars' and not sure how to block them?\n\n• Do you worry that staff might click on unsafe links, even in emails that look trusted?\n\n• Is your company still storing all passwords in a single Excel sheet?\n\n• Could employees copy sensitive business information onto USB drives or share it without approval?\n\n• Are team members still writing down login passwords on sticky notes stuck to their screens?\n\n• Would your staff benefit from simple training on how to spot fake emails, manage passwords securely, and avoid online scams?\n\n• Are you interested in security standards like the Essential 8, but not sure where to begin?\n\n• Do you want an expert audit to check the strength of your email, network, and IT security?\n\nIf you are experiencing any of these issues, we can help. IT security is critically important, and small companies are often targeted by hackers more than larger ones."
-            },
-            {
-                title: "Email and Communication",
-                details: "• Are you still using personal email accounts for business communication?\n\n• Do you struggle to keep all your emails organized in one place?\n\n• Is it hard to find important messages when you need them?\n\n• Do you worry about losing emails or important attachments?\n\n• Are your team members using different tools for chat, calls, and emails, making communication confusing?\n\n• Do you experience delays because emails or messages are missed?\n\n• Is sharing calendars, tasks, or documents with your team difficult?\n\n• Are you concerned about the security of your business emails?\n\n• Do you wish there was a way to communicate with clients and team members more efficiently?\n\n• Would your team be more productive with a centralized, secure communication system?\n\nIf any of these situations sound familiar and you need assistance, please let us know. We specialise in Outlook, shared mailboxes, email forwarding, email backups, email monitoring, and much more."
-            },
-            {
-                title: "Document Management",
-                details: "• Are your important documents scattered across multiple computers, emails, or drives?\n\n• Do you struggle to find the latest version of a file when you need it?\n\n• Is sharing documents with your team slow or complicated?\n\n• Do you worry about losing critical files due to accidental deletion or hardware failure?\n\n• Are paper documents still taking up space and slowing down your workflow?\n\n• Do you spend too much time manually organising or naming files?\n\n• Are approvals or document workflows taking longer than they should?\n\n• Is it hard to track who accessed or edited a document?\n\n• Do you face security risks with sensitive documents being stored in unsecured locations?\n\n• Would your team benefit from a centralised, easy-to-use system for all documents?\n\n If any of these situations sound familiar, we can help you manage and share your documents more effectively. Just let us know what you need, and we can explore cost-effective, reliable, and user-friendly solutions for you!"
-            }
-        ];
-
-        // Expose details for use from footer links and other triggers
-        this.serviceDetails = serviceDetails;
+        const serviceCards = document.querySelectorAll('#services .service-card');
 
         readMoreBtns.forEach((btn, index) => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                console.log('Clicked Read More button. Index:', index, 'Service Details:', serviceDetails[index]);
-                // Ensure serviceDetails[index] exists before trying to access its properties
-                if (serviceDetails[index]) {
-                    this.showServiceDetails(serviceDetails[index]);
-                } else {
-                    console.error(`Service details not found for index: ${index}`);
-                }
-            });
+            const card = serviceCards[index];
+            const titleElement = card.querySelector('h3');
+            const title = titleElement ? titleElement.textContent.trim() : '';
+            
+            // Get the corresponding page filename
+            const pageFile = servicePageMap[title];
+            
+            if (pageFile) {
+                // Change button to a link that opens in the same window
+                btn.outerHTML = `<a href="ProjectPages/${pageFile}" class="read-more-btn">Read More</a>`;
+            } else {
+                // Fallback to original button behavior if no mapping found
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('Service page not found for:', title);
+                });
+            }
         });
     }
 
@@ -635,4 +615,4 @@ class ServicesCarousel {
 // Initialize carousel when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.servicesCarousel = new ServicesCarousel();
-});     
+});

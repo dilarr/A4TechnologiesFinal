@@ -3,16 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>IT Support</title>
+        <title>AI and Automation</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container">
             <!-- Back Button -->
-            <a href="../index.html#service-it-support" class="back-button">
+            <a href="../index.html" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
-                Back to Services
+                <span id="backButtonText">Back</span>
             </a>
           
             
@@ -23,7 +23,7 @@
                     </div>
                     <div class="header-text">
                         <h1 class="header-title">A4Technologies</h1>
-                        <p class="header-subtitle">IT Support</p>
+                        <p class="header-subtitle">AI and Automation</p>
                     </div>
                 </div>
                 
@@ -31,7 +31,7 @@
                     <div class="client-image-frame">
                         <div class="client-image">
                             <!-- Client logo with fallback for missing image -->
-                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="IT Support" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="AI and Automation" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
                             <div class="logo-placeholder" id="logo-placeholder" style="display: none;">
                                 <i class="fas fa-mountain"></i>
                                
@@ -52,46 +52,29 @@
                     <ul class="approach-list">
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Do you often encounter problems with your computer or internet that you can’t solve on your own? </span>
+                            <span>Do you or your team spend hours every week doing the same repetitive tasks?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Is your team losing precious time while waiting for technical issues to get fixed? </span>
+                            <span>Are you still entering the same data into multiple systems manually?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Are you concerned about what would happen if your computer suddenly crashed?</span>
+                            <span>Do you find it difficult to analyze large amounts of data to make decisions?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Are your important files and emails backed up and secure?</span>
+                            <span>Are you missing opportunities because tasks take too long to complete?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Do you have a plan ready in case your business experiences a cyberattack?</span>
+                            <span>Do you wish routine approvals, reminders, or follow-ups could happen automatically?</span>
                         </li>
                          <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Are your software updates and security fixes handled regularly?</span>
+                            <span>Would your team be more productive if they had more time for high-value work instead of admin tasks?</span>
                          </li>
-                        <li>
-                         <i class="fas fa-check-circle"></i>
-                            <span>Do you feel unsure about who to contact when there’s a tech problem?</span>
-                        </li> 
-                        <li>
-                         <i class="fas fa-check-circle"></i>
-                            <span>Is slow Wi-Fi or network outages making it hard for your team to work efficiently?</span>
-                        </li> 
-                        <li>
-                         <i class="fas fa-check-circle"></i>
-                            <span>Are you confident that your business data is protected from hackers and viruses?</span>
-                        </li> 
-                        <li>
-                         <i class="fas fa-check-circle"></i>
-                            <span>Do you find yourself spending more time fixing tech problems than actually running your business? </span>
-                        </li>
-                    
-                    </ul>
+                       
                 </div>
                 
             </section>
@@ -106,17 +89,40 @@
                 <div class="section-content">
                     <div class="info-item">
                         <div class="info-value">
-                            <p>BusinessPlex has successfully relocated to a new facility and is initiating a comprehensive restructuring of its network infrastructure. This includes the optimisation of Windows laptops for enhanced performance and security, as well as the redesign of meeting rooms to facilitate better collaboration and communication. The goal is to create a more efficient working environment that supports the company's growth and enhances productivity for all employees.</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <footer>
-                <p>&copy; 2025 BusinessPlex. All rights reserved. | Powered by A4Technologies</p>
+                <p>&copy; 2025 A4technologies. All rights reserved. | Powered by A4technologies</p>
             </footer>
         </div>
 
         <script src="script.js"></script>
+        <script>
+            // Set back button target based on referrer or URL hash
+            document.addEventListener('DOMContentLoaded', function() {
+                const backButton = document.getElementById('backButton');
+                const backButtonText = document.getElementById('backButtonText');
+                
+                // Check if the referrer is from the footer (service links)
+                if (document.referrer && document.referrer.includes('#footer')) {
+                    backButton.href = '../index.html#footer';
+                    backButtonText.textContent = 'Back to Footer';
+                } 
+                // Check if the URL hash indicates coming from services section
+                else if (window.location.hash === '#services') {
+                    backButton.href = '../index.html#services';
+                    backButtonText.textContent = 'Back to Services';
+                }
+                // Default to footer (for direct navigation)
+                else {
+                    backButton.href = '../index.html#footer';
+                    backButtonText.textContent = 'Back to Footer';
+                }
+            });
+        </script>
     </body>
     </html>

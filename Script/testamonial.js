@@ -19,7 +19,8 @@
         }
         
         getTotalSlides() {
-            return this.totalCards; // 1 card per slide on both desktop and mobile
+            // Always show 1 card per slide on both mobile and desktop
+            return this.totalCards;
         }
         
         init() {

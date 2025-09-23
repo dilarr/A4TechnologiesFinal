@@ -3,16 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>IT Support</title>
+        <title>Desktop / Laptop Setup and updating</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container">
             <!-- Back Button -->
-            <a href="../index.html#service-it-support" class="back-button">
+            <a href="../index.html" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
-                Back to Services
+                <span id="backButtonText">Back</span>
             </a>
           
             
@@ -23,7 +23,7 @@
                     </div>
                     <div class="header-text">
                         <h1 class="header-title">A4Technologies</h1>
-                        <p class="header-subtitle">IT Support</p>
+                        <p class="header-subtitle">Desktop / Laptop Setup and updating</p>
                     </div>
                 </div>
                 
@@ -31,7 +31,7 @@
                     <div class="client-image-frame">
                         <div class="client-image">
                             <!-- Client logo with fallback for missing image -->
-                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="IT Support" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Computer Setup" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
                             <div class="logo-placeholder" id="logo-placeholder" style="display: none;">
                                 <i class="fas fa-mountain"></i>
                                
@@ -52,43 +52,47 @@
                     <ul class="approach-list">
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Do you often encounter problems with your computer or internet that you can’t solve on your own? </span>
+                            <span>Do you have multiple laptops and desktops but aren’t sure if they’re updated with the latest security and system patches?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Is your team losing precious time while waiting for technical issues to get fixed? </span>
+                            <span>When software needs an update, are you spending hours going from computer to computer to install it manually?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Are you concerned about what would happen if your computer suddenly crashed?</span>
+                            <span>Do you know how many computers your business owns, how old they are, or when they should be replaced?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Are your important files and emails backed up and secure?</span>
+                            <span>Do you buy new computers but struggle to set them up the right way?</span>
                         </li>
                         <li>
                             <i class="fas fa-check-circle"></i>
-                            <span>Do you have a plan ready in case your business experiences a cyberattack?</span>
+                            <span>Do you worry that your computer might be slow or unsafe because it’s not updated?</span>
                         </li>
                          <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Are your software updates and security fixes handled regularly?</span>
+                            <span>Is installing software, email, and security tools on new devices taking too much of your time?</span>
                          </li>
                         <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Do you feel unsure about who to contact when there’s a tech problem?</span>
+                            <span>Do you have different staff using computers set up in different ways (no standard setup)?</span>
                         </li> 
                         <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Is slow Wi-Fi or network outages making it hard for your team to work efficiently?</span>
+                            <span>Are important files and settings lost when you replace or upgrade computers?</span>
                         </li> 
                         <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Are you confident that your business data is protected from hackers and viruses?</span>
+                            <span>Do you know if your devices are protected with antivirus and security tools?</span>
                         </li> 
                         <li>
                          <i class="fas fa-check-circle"></i>
-                            <span>Do you find yourself spending more time fixing tech problems than actually running your business? </span>
+                            <span>Is your team frustrated by slow, unpatched, or outdated laptops?</span>
+                        </li>
+                         <li>
+                         <i class="fas fa-check-circle"></i>
+                            <span>Would it save you time if every new device was ready-to-use on day one with all apps and security configured?</span>
                         </li>
                     
                     </ul>
@@ -106,17 +110,40 @@
                 <div class="section-content">
                     <div class="info-item">
                         <div class="info-value">
-                            <p>BusinessPlex has successfully relocated to a new facility and is initiating a comprehensive restructuring of its network infrastructure. This includes the optimisation of Windows laptops for enhanced performance and security, as well as the redesign of meeting rooms to facilitate better collaboration and communication. The goal is to create a more efficient working environment that supports the company's growth and enhances productivity for all employees.</p>
+                            <p>If you want someone to manage your desktop computers and ensure that updates and security measures are properly implemented, we can help. We can set up your computers on a centralized management platform where you can oversee Windows updates, application installations, and much more!</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <footer>
-                <p>&copy; 2025 BusinessPlex. All rights reserved. | Powered by A4Technologies</p>
+                <p>&copy; 2025 A4technologies. All rights reserved. | Powered by A4technologies</p>
             </footer>
         </div>
 
         <script src="script.js"></script>
+        <script>
+            // Set back button target based on referrer or URL hash
+            document.addEventListener('DOMContentLoaded', function() {
+                const backButton = document.getElementById('backButton');
+                const backButtonText = document.getElementById('backButtonText');
+                
+                // Check if the referrer is from the footer (service links)
+                if (document.referrer && document.referrer.includes('#footer')) {
+                    backButton.href = '../index.html#footer';
+                    backButtonText.textContent = 'Back to Footer';
+                } 
+                // Check if the URL hash indicates coming from services section
+                else if (window.location.hash === '#services') {
+                    backButton.href = '../index.html#services';
+                    backButtonText.textContent = 'Back to Services';
+                }
+                // Default to footer (for direct navigation)
+                else {
+                    backButton.href = '../index.html#footer';
+                    backButtonText.textContent = 'Back to Footer';
+                }
+            });
+        </script>
     </body>
     </html>
