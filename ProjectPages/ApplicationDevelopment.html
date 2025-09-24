@@ -24,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         backButton.href = '../index.html';
     }
+    
+    // Add click event to save scroll position before navigating back
+    backButton.addEventListener('click', function() {
+        // Save current scroll position
+        sessionStorage.setItem('returnScrollTop', window.scrollY);
+    });
 });
 </script>
 

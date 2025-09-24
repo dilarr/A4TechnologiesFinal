@@ -1,12 +1,12 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document Management</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const backButton = document.getElementById('backButton');
@@ -24,60 +24,59 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         backButton.href = '../index.html';
     }
+    
+    // Add click event to save scroll position before navigating back
+    backButton.addEventListener('click', function() {
+        // Save current scroll position
+        sessionStorage.setItem('returnScrollTop', window.scrollY);
+    });
 });
 </script>
 
-
-
-
-    
-
-
-
-    <body>
-        <div class="container">
-            <!-- Back Button -->
-           <a href="#" class="back-button" id="backButton">
-                <i class="fas fa-arrow-left"></i>
-                Back to Services
-            </a>
-          
-            
-            <header>
-                <div class="logo-container">
-                    <div class="logo">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="header-text">
-                        <h1 class="header-title">A4Technologies</h1>
-                        <p class="header-subtitle">Document Management</p>
-                    </div>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+       <a href="#" class="back-button" id="backButton">
+            <i class="fas fa-arrow-left"></i>
+            Back to Services
+        </a>
+      
+        
+        <header>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-mountain"></i>
                 </div>
-                
-                <div class="client-image-container">
-                    <div class="client-image-frame">
-                        <div class="client-image">
-                            <!-- Client logo with fallback for missing image -->
-                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Document Management" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
-                            <div class="logo-placeholder" id="logo-placeholder" style="display: none;">
-                                <i class="fas fa-mountain"></i>
-                               
-                            </div>
+                <div class="header-text">
+                    <h1 class="header-title">A4Technologies</h1>
+                    <p class="header-subtitle">Document Management</p>
+                </div>
+            </div>
+            
+            <div class="client-image-container">
+                <div class="client-image-frame">
+                    <div class="client-image">
+                        <!-- Client logo with fallback for missing image -->
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Document Management" class="client-logo" onerror="this.style.display='none'; document.getElementById('logo-placeholder').style.display='flex';">
+                        <div class="logo-placeholder" id="logo-placeholder" style="display: none;">
+                            <i class="fas fa-mountain"></i>
+                           
                         </div>
                     </div>
                 </div>
-            </header>
+            </div>
+        </header>
 
-            <section class="content-section">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <h2 class="section-title">Do you also have such problems?</h2>
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-exclamation-circle"></i>
                 </div>
-                 <div class="section-content">
-                    <ul class="approach-list">
-                       <li>
+                <h2 class="section-title">Do you also have such problems?</h2>
+            </div>
+             <div class="section-content">
+                <ul class="approach-list">
+                   <li>
     <i class="fas fa-check-circle"></i>
     <span>Are your important documents scattered across multiple computers, emails, or drives?</span>
 </li>
@@ -118,33 +117,33 @@ document.addEventListener("DOMContentLoaded", () => {
     <span>Would your team benefit from a centralised, easy-to-use system for all documents?</span>
 </li>
 
-                    
-                    </ul>
-                </div>
                 
-            </section>
+                </ul>
+            </div>
+            
+        </section>
 
-            <section class="content-section">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h2 class="section-title">If so, here is the solution.</h2>
+        <section class="content-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-lightbulb"></i>
                 </div>
-                <div class="section-content">
-                    <div class="info-item">
-                        <div class="info-value">
-                            <p>If any of these situations sound familiar, we can help you manage and share your documents more effectively. Just let us know what you need, and we can explore cost-effective, reliable, and user-friendly solutions for you!</p>
-                        </div>
+                <h2 class="section-title">If so, here is the solution.</h2>
+            </div>
+            <div class="section-content">
+                <div class="info-item">
+                    <div class="info-value">
+                        <p>If any of these situations sound familiar, we can help you manage and share your documents more effectively. Just let us know what you need, and we can explore cost-effective, reliable, and user-friendly solutions for you!</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <footer>
-                <p>&copy; 2025 A4technologies. All rights reserved. | Powered by A4technologies</p>
-            </footer>
-        </div>
+        <footer>
+            <p>&copy; 2025 A4technologies. All rights reserved. | Powered by A4technologies</p>
+        </footer>
+    </div>
 
-        <script src="script.js"></script>
-    </body>
-    </html>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -39,6 +39,39 @@ class ServicesCarousel {
         this.bindEvents();
         this.updateCarousel();
         this.updateButtonStates();
+        
+        // Restore carousel position if it was saved
+        this.restoreCarouselPosition();
+    }
+    
+    restoreCarouselPosition() {
+        // Check if we have saved carousel position
+        const savedPosition = sessionStorage.getItem('servicesCarouselPosition');
+        const savedCardIndex = sessionStorage.getItem('serviceCardIndex');
+        
+        if (savedPosition !== null) {
+            // Move to the saved position
+            this.currentIndex = parseInt(savedPosition);
+            this.updateCarousel();
+            this.updateButtonStates();
+            
+            // Scroll to the specific card if we're on desktop
+            if (!this.isMobile && savedCardIndex !== null) {
+                const cardIndex = parseInt(savedCardIndex);
+                // Calculate which slide group this card is in
+                const slideGroupIndex = Math.floor(cardIndex / 3);
+                // If we're not already on the correct slide group, navigate to it
+                if (slideGroupIndex !== this.currentIndex) {
+                    this.currentIndex = slideGroupIndex;
+                    this.updateCarousel();
+                    this.updateButtonStates();
+                }
+            }
+            
+            // Clear the saved position so it's not used again
+            sessionStorage.removeItem('servicesCarouselPosition');
+            sessionStorage.removeItem('serviceCardIndex');
+        }
     }
 
     restructureForMobile() {
@@ -226,7 +259,7 @@ class ServicesCarousel {
             
             if (pageFile) {
                 // Change button to a link that opens in the same window
-                btn.outerHTML = `<a href="ProjectPages/${pageFile}" class="read-more-btn">Read More</a>`;
+                btn.outerHTML = `<a href="ProjectPages/${pageFile}" class="read-more-btn" data-card-index="${index}">Read More</a>`;
             } else {
                 // Fallback to original button behavior if no mapping found
                 btn.addEventListener('click', (e) => {
@@ -234,6 +267,15 @@ class ServicesCarousel {
                     console.log('Service page not found for:', title);
                 });
             }
+        });
+        
+        // Add click event listeners to the newly created links
+        document.querySelectorAll('#services .read-more-btn').forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                // Save current carousel position and card index to sessionStorage
+                sessionStorage.setItem('servicesCarouselPosition', this.currentIndex);
+                sessionStorage.setItem('serviceCardIndex', index);
+            });
         });
     }
 
