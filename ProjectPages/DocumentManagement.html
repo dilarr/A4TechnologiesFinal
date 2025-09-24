@@ -7,10 +7,37 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const backButton = document.getElementById('backButton');
+    if (!backButton) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+
+    console.log('from:', from); // Debug
+
+    if (from === 'services') {
+        backButton.href = '../index.html#services';
+    } else if (from === 'footer') {
+        backButton.href = '../index.html#footer-services';
+    } else {
+        backButton.href = '../index.html';
+    }
+});
+</script>
+
+
+
+
+    
+
+
+
     <body>
         <div class="container">
             <!-- Back Button -->
-            <a href="../index.html#services" class="back-button">
+           <a href="#" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
                 Back to Services
             </a>

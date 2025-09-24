@@ -209,6 +209,7 @@ class ServicesCarousel {
             "IT Security and Security Audit": "ITSecurityandSecurityAudit.html",
             "Email and Communication": "EmailandCommunication.html",
             "Document Management": "DocumentManagement.html"
+
         };
 
         // Re-bind read more buttons after restructuring

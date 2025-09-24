@@ -7,13 +7,45 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const backButton = document.getElementById('backButton');
+    if (!backButton) return;
+
+    // Read the 'from' query parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+
+    console.log('from:', from); // For debugging
+
+    // Determine the correct target for back
+    let target = '../index.html'; // default
+
+    if (from === 'services') {
+        target += '#services';
+    } else if (from === 'footer') {
+        target += '#footer-services';
+    }
+
+    // Set href and handle click
+    backButton.href = target;
+    backButton.addEventListener('click', e => {
+        e.preventDefault();
+        window.location.href = target;
+    });
+
+});
+</script>
+
     <body>
         <div class="container">
             <!-- Back Button -->
-            <a href="../index.html" class="back-button" id="backButton">
+            <a href="#" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
-                <span id="backButtonText">Back</span>
+                Back to Services
             </a>
+          
           
             
             <header>

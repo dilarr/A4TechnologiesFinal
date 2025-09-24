@@ -15,9 +15,39 @@
             Back to Services
         </a>
         <!-- Back Button -->
-       <a href="../index.html#projects" class="back-button">
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const backButton = document.getElementById('backButton');
+    if (!backButton) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get('from');
+
+    console.log('from:', from); // Debug
+
+    if (from === 'services') {
+        backButton.href = '../index.html#services';
+    } else if (from === 'footer') {
+        backButton.href = '../index.html#footer-services';
+    } else {
+        backButton.href = '../index.html';
+    }
+});
+</script>
+
+
+
+
+    
+
+
+
+    <body>
+        <div class="container">
+            <!-- Back Button -->
+           <a href="#" class="back-button" id="backButton">
                 <i class="fas fa-arrow-left"></i>
-                Back
+                Back to Services
             </a>
         
         <header>

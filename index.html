@@ -10,6 +10,103 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="./CSS/styles.css" />
 </head>
+
+<!-- <script>
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        // List of all service pages
+        const servicePages = [
+            "DocumentManagement.html",
+            "EmailandCommunication.html",
+            "ITSecurityandSecurityAudit.html",
+            "InternetandNetworkSetup.html",
+            "DesktopLaptopSetupandUpdating.html",
+            "WebsiteandSocial Media.html",
+            "ApplicationDevelopment.html",
+            "AIandAutomation.html",
+             "IT Support.html"
+           
+        ];
+
+        // 1. Add ?from=services to all main Services card links
+        document.querySelectorAll('.service-card a').forEach(a => {
+            if (servicePages.some(page => a.href.endsWith(page))) {
+                a.href = a.href.split('?')[0] + '?from=services';
+            }
+        });
+
+        // 2. Add ?from=footer to all footer services links (footer-services-1 and footer-services-2)
+        document.querySelectorAll('.footer-services-1 a, .footer-services-2 a').forEach(a => {
+            if (servicePages.some(page => a.href.endsWith(page))) {
+                a.href = a.href.split('?')[0] + '?from=footer';
+            }
+        });
+    }, 300); // Slightly longer delay for dynamically loaded links
+});
+</script> -->
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        const servicePages = [
+            "DocumentManagement.html",
+            "EmailandCommunication.html",
+            "ITSecurityandSecurityAudit.html",
+            "InternetandNetworkSetup.html",
+            "DesktopLaptopSetupandUpdating.html",
+            "WebsiteandSocial Media.html",
+            "ApplicationDevelopment.html",
+            "AIandAutomation.html",
+            "IT Support.html"
+        ];
+
+        function getFilename(a) {
+            const url = new URL(a.href, window.location.href);
+            return decodeURIComponent(url.pathname.split('/').pop());
+        }
+
+        // Add ?from=services to main service cards
+        document.querySelectorAll('.service-card a').forEach(a => {
+            if (servicePages.includes(getFilename(a))) {
+                a.href = a.href.split('?')[0] + '?from=services';
+            }
+        });
+
+        // Add ?from=footer to ALL footer links
+        document.querySelectorAll('.footer-services-1 a, .footer-services-2 a, .footer-mobile-only a')
+            .forEach(a => {
+                if (servicePages.includes(getFilename(a))) {
+                    a.href = a.href.split('?')[0] + '?from=footer';
+                }
+            });
+
+        // Back button
+        const backButton = document.getElementById('backButton');
+        if (!backButton) return;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const from = urlParams.get('from');
+
+        let target = '../index.html'; // default
+        if (from === 'services') target += '#services';
+        else if (from === 'footer') target += '#footer-services';
+
+        backButton.href = target;
+        backButton.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.href = target;
+        });
+
+    }, 300);
+});
+</script>
+
+
+ 
+ 
+
+
 <body class="has-topbar">
   <!-- Loader -->
   <div id="loading" class="site-loader" aria-hidden="true">
@@ -1400,27 +1497,34 @@
           </div>
         </div>
         
-         <div class="footer-section footer-services-1">
+
+         <div class="footer-section footer-services-1" id="footer-services">
           <h4>Services</h4>
           <ul>
-            <li><a href="#services" data-target="Document Management">Document Management</a></li>
-            <li><a href="#services" data-target="Email and Communication">Email and Communication</a></li>
-            <li><a href="#services" data-target="IT Security and Security Audit">IT Security and Security Audit</a></li>
-            <li><a href="#services" data-target="Internet and Network Setup">Internet and Network Setup</a></li>
-            <li><a href="#services" data-target="Desktop / Laptop Setup and Updating">Desktop / Laptop Setup and updating</a></li>
-            <li class="footer-mobile-only"><a href="#services" data-target="Website and Social Media Marketing">Website and Social media marketing</a></li>
-            <li class="footer-mobile-only"><a href="#services" data-target="Application Development">Application Development</a></li>
-            <li class="footer-mobile-only"><a href="#services" data-target="AI and Automation">AI and Automation</a></li>
-            <li class="footer-mobile-only"><a href="#services" data-target="IT Support">IT Support</a></li>
+            <li><a href="./ProjectPages/DocumentManagement.html">Document Management</a></li>
+         
+            
+</li>
+
+            <li><a href="./ProjectPages/EmailandCommunication.html" >Email and Communication</a></li>
+             
+            <li><a href="./ProjectPages/ITSecurityandSecurityAudit.html" >IT Security and Security Audit</a></li>
+            <li><a href="./ProjectPages/InternetandNetworkSetup.html" >Internet and Network Setup</a></li>
+           
+            <li><a href="./ProjectPages/DesktopLaptopSetupandUpdating.html" >Desktop / Laptop Setup and updating</a></li>
+            <li class="footer-mobile-only"><a href="./ProjectPages/WebsiteandSocial Media.html" >Website and Social media marketing</a></li>
+            <li class="footer-mobile-only"><a href="./ProjectPages/ApplicationDevelopment.html">Application Development</a></li>
+            <li class="footer-mobile-only"><a href="./ProjectPages/AIandAutomation.html" >AI and Automation</a></li>
+            <li class="footer-mobile-only"><a href="./ProjectPages/IT Support.html" >IT Support</a></li>
           </ul>
         </div>
-        <div class="footer-section footer-services-2">
+        <div class="footer-section footer-services-2" id="footer-services">
           <h4>Services 2</h4>
           <ul>
-            <li><a href="#services" data-target="Website and Social Media Marketing">Website and Social media marketing</a></li>
-            <li><a href="#services" data-target="Application Development">Application Development</a></li>
-            <li><a href="#services" data-target="AI and Automation">AI and Automation</a></li>
-            <li><a href="#services" data-target="IT Support">IT Support</a></li>
+            <li><a href="./ProjectPages/WebsiteandSocial Media.html" >Website and Social media marketing</a></li>
+            <li><a href="./ProjectPages/ApplicationDevelopment.html" >Application Development</a></li>
+            <li><a href="./ProjectPages/AIandAutomation.html" >AI and Automation</a></li>
+            <li><a href="./ProjectPages/IT Support.html" >IT Support</a></li>
           </ul>
         </div>
         <div class="footer-section">
