@@ -108,7 +108,7 @@
         }
 
         .back-button:hover {
-        background: rgba(102, 126, 234, 0.2);
+        /* background: rgba(102, 126, 234, 0.2); */
         transform: translateY(-2px);
         box-shadow: var(--shadow-md);
         }
