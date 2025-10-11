@@ -7,6 +7,7 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            console.log('📝 Form submitted!');
             setLoadingState(true);
             hideMessage();
             
@@ -17,8 +18,11 @@
                 message: document.getElementById('message').value.trim()
             };
 
+            console.log('📤 Sending data:', formData);
+
             try {
-                const response = await fetch('/send-email', {
+                console.log('🌐 Making request to backend...');
+                const response = await fetch('http://localhost:3001/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -26,18 +30,23 @@
                     body: JSON.stringify(formData)
                 });
 
+                console.log('📨 Response received:', response.status);
+
                 const result = await response.json();
+                console.log('📋 Response data:', result);
 
                 if (result.success) {
-                    showMessage('🎉 Message sent successfully! මම ලඟදීම reply කරන්නම්', 'success');
+                    console.log('✅ Success! Email should be sent');
+                    showMessage('🎉 Message sent successfully! Thank you for contacting us. We will get back to you soon!', 'success');
                     form.reset();
                 } else {
+                    console.log('❌ Backend returned error:', result.message);
                     showMessage(`❌ ${result.message}`, 'error');
                 }
 
             } catch (error) {
-                console.error('Error:', error);
-                showMessage('❌ Connection error. Server එක run වෙනවද බලන්න', 'error');
+                console.error('❌ Frontend error:', error);
+                showMessage('❌ Connection error. Please make sure the backend server is running on port 4000', 'error');
             } finally {
                 setLoadingState(false);
             }
@@ -74,14 +83,14 @@
             messageDiv.style.display = 'none';
         }
 
-        // Check server connection on load
+        // Check backend server connection on load
         window.addEventListener('load', async () => {
             try {
-                const response = await fetch('/', { method: 'HEAD' });
+                const response = await fetch('http://localhost:3001/contact', { method: 'HEAD' });
                 if (response.ok) {
-                    console.log('✅ Server connection successful');
+                    console.log('✅ Backend server connection successful');
                 }
             } catch (error) {
-                console.log('❌ Server connection failed');
+                console.log('❌ Backend server connection failed - make sure to run: npm run start:dev in the backend folder (port 4000)');
             }
-             });
+        });
