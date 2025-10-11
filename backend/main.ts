@@ -16,8 +16,8 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  const port = process.env.PORT || 3001;
-  await app.listen(port);
+  const PORT = 3001;
+  await app.listen(PORT);
   
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   
@@ -31,7 +31,7 @@ async function bootstrap() {
   console.log('🚀 Rate limiting disabled (development mode)');
   console.log('📏 Request size limits: 50mb (development mode)');
   console.log('🌐 Permissive CORS enabled (development mode)');
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`SMTP is ready: ${smtpStatus ? 'true' : 'false'}`);
 }
 bootstrap();
