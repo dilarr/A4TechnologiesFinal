@@ -18,35 +18,36 @@
                 message: document.getElementById('message').value.trim()
             };
 
-            console.log('📤 Sending data:', formData);
+            console.log('📤 Creating WhatsApp message with data:', formData);
 
             try {
-                console.log('🌐 Making request to backend...');
-                const response = await fetch('http://localhost:3001/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                console.log('📨 Response received:', response.status);
-
-                const result = await response.json();
-                console.log('📋 Response data:', result);
-
-                if (result.success) {
-                    console.log('✅ Success! Email should be sent');
-                    showMessage('🎉 Message sent successfully! Thank you for contacting us. We will get back to you soon!', 'success');
-                    form.reset();
-                } else {
-                    console.log('❌ Backend returned error:', result.message);
-                    showMessage(`❌ ${result.message}`, 'error');
-                }
+                // Create WhatsApp message template
+                const whatsappMessage = `*New Contact Form Submission*
+\n*Name:* ${formData.name}
+*Email:* ${formData.email}
+*Subject:* ${formData.subject}
+\n*Message:*
+${formData.message}`;
+                
+                // Encode the message for URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                
+                // WhatsApp phone number (+94776844558)
+                const phoneNumber = '94776844558';
+                
+                // Create WhatsApp URL
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                // Open WhatsApp in a new tab
+                window.open(whatsappUrl, '_blank');
+                
+                console.log('✅ WhatsApp message created and opened');
+                showMessage('🎉 Message prepared! WhatsApp will open with your message. Thank you for contacting us!', 'success');
+                form.reset();
 
             } catch (error) {
-                console.error('❌ Frontend error:', error);
-                showMessage('❌ Connection error. Please make sure the backend server is running on port 4000', 'error');
+                console.error('❌ Error creating WhatsApp message:', error);
+                showMessage('❌ Error preparing WhatsApp message. Please try again.', 'error');
             } finally {
                 setLoadingState(false);
             }
@@ -83,14 +84,5 @@
             messageDiv.style.display = 'none';
         }
 
-        // Check backend server connection on load
-        window.addEventListener('load', async () => {
-            try {
-                const response = await fetch('http://localhost:3001/contact', { method: 'HEAD' });
-                if (response.ok) {
-                    console.log('✅ Backend server connection successful');
-                }
-            } catch (error) {
-                console.log('❌ Backend server connection failed - make sure to run: npm run start:dev in the backend folder (port 4000)');
-            }
-        });
+        // No backend connection needed for WhatsApp integration
+        console.log('WhatsApp integration ready');
